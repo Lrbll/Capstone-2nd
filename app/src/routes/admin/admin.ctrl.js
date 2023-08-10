@@ -4,10 +4,21 @@ let db = require("../../config/db");
 const output = {
   admin: (req, res) => {
     const is_logined = req.session.is_logined;
-    res.render("home/admin", { is_logined: is_logined });
+    const is_who = req.session.is_who;
+    if (is_who == "admin") {
+      res.render("home/admin", { is_logined: is_logined });
+    } else {
+      res.send(`<script type="text/javascript">alert("접근할 수 없습니다."); 
+              document.location.href="/";</script>`);
+    }
+    
   },
   adminLogin: (req, res) => {
     const is_logined = req.session.is_logined;
+    const is_who = req.session.is_who;
+    if (is_who == "admin") {
+      res.redirect(`/admin`);
+    }
     res.render("home/adminLogin", { is_logined: is_logined });
   },
 };
@@ -27,6 +38,7 @@ const process = {
           if (results.length > 0) {
             // db에서의 반환값이 있으면 로그인 성공
             req.session.is_logined = true; // 세션 정보 갱신
+            req.session.is_who = "admin";
             req.session.nickname = id;
             req.session.save(function () {
               res.redirect(`/admin`);

@@ -43,6 +43,7 @@ const process = {
           if (results.length > 0) {
             // db에서의 반환값이 있으면 로그인 성공
             req.session.is_logined = true; // 세션 정보 갱신
+            req.session.is_who = "user";
             req.session.nickname = id;
             req.session.save(function () {
               res.redirect(`/`);
