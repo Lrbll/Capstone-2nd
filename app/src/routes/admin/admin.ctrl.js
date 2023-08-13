@@ -5,21 +5,48 @@ const output = {
   admin: (req, res) => {
     const is_logined = req.session.is_logined;
     const is_who = req.session.is_who;
+    
     if (is_who == "admin") {
-      res.render("home/admin", { is_logined: is_logined });
+      // 사용자 목록 조회 쿼리
+      const query1 = 'SELECT * FROM users';
+      const query2 = 'SELECT * FROM results_info';
+
+      // 쿼리1 실행
+      db.mysql.query(query1, (error1, results1) => {
+        if (error1) {
+          console.error('쿼리 실행 실패:', error1);
+          return;
+        }
+
+        // 쿼리2 실행
+        db.mysql.query(query2, (error2, results2) => {
+          if (error2) {
+            console.error('쿼리 실행 실패:', error2);
+            return;
+          }
+
+          res.render("home/Admin/admin", {
+            is_logined: is_logined,
+            users: results1,
+            results_info: results2
+          });
+        });
+      });
     } else {
       res.send(`<script type="text/javascript">alert("접근할 수 없습니다."); 
               document.location.href="/";</script>`);
     }
     
   },
+
   adminLogin: (req, res) => {
     const is_logined = req.session.is_logined;
     const is_who = req.session.is_who;
     if (is_who == "admin") {
-      res.redirect(`/admin`);
+      res.redirect(302,`/admin`);
+    } else {
+      res.render("home/Admin/adminLogin", { is_logined: is_logined });
     }
-    res.render("home/adminLogin", { is_logined: is_logined });
   },
 };
 

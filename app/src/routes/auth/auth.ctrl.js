@@ -1,7 +1,8 @@
 "use strict";
 
 let db = require("../../config/db");
-let authCheck = require("../../../src/public/js/home/authCheck.js");
+const authCheck = require("../../public/js/home/authCheck")
+const readline = require('readline');
 
 const output = {
   login: (req, res) => {
@@ -71,8 +72,11 @@ const process = {
     var id = req.body.id;
     var pw = req.body.pw;
     var confirm_pw = req.body.confirm_pw;
+    var email = req.body.email;
+    var name = req.body.name;
+    var company = req.body.company; 
 
-    if (id && pw && confirm_pw) {
+    if (id && pw && confirm_pw && email && name && company) {
       db.mysql.query(
         "SELECT * FROM users WHERE id = ?",
         [id],
@@ -82,8 +86,8 @@ const process = {
           if (results.length <= 0 && pw == confirm_pw) {
             // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
             db.mysql.query(
-              "INSERT INTO users (id, pw) VALUES(?,?)",
-              [id, pw],
+              "INSERT INTO users (id, pw, email, user_name, company) VALUES(?,?,?,?,?)",
+              [id, pw, email, name, company],
               function (error, data) {
                 if (error) throw error2;
                 res.send(`<script type="text/javascript">alert("회원가입이 완료되었습니다.");
@@ -167,29 +171,42 @@ const process = {
     // 현재 로그인한 사용자의 세션 정보 가져오기
     const id = req.session.nickname;
 
-    if (id) {
-      // 회원 데이터 삭제 로직
-      db.mysql.query(
-        "DELETE FROM users WHERE id = ?",
-        [id],
-        (error, result) => {
-          if (error) {
-            console.error(error);
-            res.redirect("/"); // 에러 발생 시 인덱스 페이지로 리다이렉션
-          } else {
-            // 로그인 데이터 파기 (세션 삭제)
-            req.session.destroy((err) => {
-              if (err) {
-                console.error(err);
-                res.redirect("/"); // 에러 발생 시 인덱스 페이지로 리다이렉션
-              } else {
-                res.redirect("/"); // 회원 탈퇴 완료 시 인덱스 페이지로 리다이렉션
-              }
-            });
-          }
+    db.mysql.query(
+      "DELETE FROM users WHERE id = ?",
+      [id],
+      (error, result) => {
+        if (error) {
+          console.error(error);
+          res.redirect("/"); // 에러 발생 시 인덱스 페이지로 리다이렉션
+        } else {
+          // 로그인 데이터 파기 (세션 삭제)
+          req.session.destroy((err) => {
+            if (err) {
+              console.error(err);
+              res.redirect("/"); // 에러 발생 시 인덱스 페이지로 리다이렉션
+            } else {
+              res.send(`<script type="text/javascript">alert("회원 탈퇴가 완료되었습니다."); 
+                document.location.href="/";</script>`);
+            }
+          });
         }
-      );
-    }
+      }
+    );
+    // const rl = readline.createInterface({
+    //   input: process.stdin,
+    //   output: process.stdout
+    // });
+    
+    // rl.question('정말로 회원 탈퇴하시겠습니까? (y/n) ', (answer) => {
+    //   if (answer.toLowerCase() === 'y') {
+        
+    //   } else {
+    //     res.send(`<script type="text/javascript">alert("회원 탈퇴가 취소되었습니다."); 
+    //     document.location.href="/";</script>`);
+    //   }
+  
+    //   rl.close();
+    // });
   },
 };
 

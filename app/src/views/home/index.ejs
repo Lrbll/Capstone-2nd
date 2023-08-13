@@ -28,7 +28,7 @@
   <body class="leading-normal tracking-normal text-white gradient">
     <!-- 헤더 영역 -->
     <header class="fixed w-full shadow-md z-10">
-      <nav class="bg-white border-gray-200 py-2.5">
+      <nav class="bg-white border-gray-200 py-3.5">
         <div
           class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
         >
@@ -46,8 +46,10 @@
           <form
             class="flex items-center lg:order-2 order-last"
             action="/auth/logout"
-            method="post"
-          >
+            method="post">
+            <% if (is_who == "admin") { %>
+            <a href="/admin"><img src="/img/admin_icon.png" alt="관리자 아이콘" class="h-9 mx-2"></a>
+            <% } %>
             <button
               type="submit"
               class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs shadow-md px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0"
@@ -78,7 +80,7 @@
               <li>
                 <a
                   href="/"
-                  class="block py-2 pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
                   aria-current="page"
                   >홈</a
                 >
@@ -87,28 +89,28 @@
               <li>
                 <a
                   href="/diagnostics"
-                  class="block py-2 pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
                   >진단서비스</a
                 >
               </li>
               <li>
                 <a
                   href="/list"
-                  class="block py-2 pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
                   >점검항목</a
                 >
               </li>
               <li>
                 <a
                   href="/result"
-                  class="block py-2 pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
                   >진단결과</a
                 >
               </li>
               <li>
                 <a
                   href="/auth/mypage"
-                  class="block py-2 pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
                   >나의정보</a
                 >
               </li>

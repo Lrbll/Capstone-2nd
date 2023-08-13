@@ -9,6 +9,7 @@ let db = require("../../config/db");
 const output = {
   home: (req, res) => {
     const is_logined = req.session.is_logined;
+    const is_who = req.session.is_who;
     fs.readFile("src/scripts_info/scripts.json", "utf8", (err, data) => {
       if (err) {
         console.error(err);
@@ -17,7 +18,7 @@ const output = {
       }
 
       const scripts = JSON.parse(data);
-      res.render("home/index", { scripts: scripts, is_logined: is_logined });
+      res.render("home/index", { scripts: scripts, is_logined: is_logined, is_who: is_who });
     });
   },
 
