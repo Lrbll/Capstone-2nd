@@ -192,21 +192,6 @@ const process = {
         }
       }
     );
-    // const rl = readline.createInterface({
-    //   input: process.stdin,
-    //   output: process.stdout
-    // });
-    
-    // rl.question('정말로 회원 탈퇴하시겠습니까? (y/n) ', (answer) => {
-    //   if (answer.toLowerCase() === 'y') {
-        
-    //   } else {
-    //     res.send(`<script type="text/javascript">alert("회원 탈퇴가 취소되었습니다."); 
-    //     document.location.href="/";</script>`);
-    //   }
-  
-    //   rl.close();
-    // });
   },
 };
 

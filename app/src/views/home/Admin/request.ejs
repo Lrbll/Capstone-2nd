@@ -44,16 +44,16 @@
         <!-- Barra lateral de navegación (oculta en dispositivos pequeños) -->
         <div class="p-2 bg-neutral-900 w-full md:w-60 flex flex-col md:flex hidden" id="sideNav">
             <nav>
-                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="/admin">
+                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="#">
                     <i class="fas fa-home w-9"></i>전체보기
                 </a>
                 <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="#">
                     <i class="fas fa-file-alt w-9"></i>권한
                 </a>
-                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="/admin/managemnt/user">
+                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="#">
                     <i class="fas fa-users w-9"></i>회원 정보
                 </a>
-                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="/admin/managemnt/request">
+                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="#">
                     <i class="fas fa-store w-9"></i>진단 요청
                 </a>
                 <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="#">
@@ -111,49 +111,6 @@
                 </div>
             </div>
 
-            <!-- 회원정보 영역 -->
-            <div class="mt-8 bg-white p-4 shadow rounded-lg">
-                <h2 class="text-gray-500 text-lg font-semibold pb-4">회원 정보</h2>
-                <div class="my-1"></div> <!-- Espacio de separación -->
-                <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div> <!-- Línea con gradiente -->
-                
-                <table class="w-full table-auto text-sm">
-                    <thead>
-                        <tr class="text-sm leading-normal">
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원번호</th>
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">아이디</th>
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이름</th>
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이메일</th>
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">직장</th>
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원관리</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% users.forEach(user => { %>
-                        <tr class="hover:bg-grey-lighter">
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.num %></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><a href="#"><%= user.id %></a></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.user_name %></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.email %></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.company %></td>
-                            <td class="py-2 px-4 border-b border-grey-light">
-                                <form action="/admin/deleteUser" method="post">
-                                    <input type="hidden" name="user" value="<%= user.id %>">
-                                    <button type="submit">탈퇴</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
-                <!-- Botón "Ver más" para la tabla de Autorizaciones Pendientes -->
-                <div class="text-right mt-4">
-                    <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2 px-4 rounded">
-                        버튼
-                    </button>
-                </div>
-            </div>
-
             <!-- 진단요청 영역 -->
             <div class="mt-8 bg-white p-4 shadow rounded-lg">
                 <div class="bg-white p-4 rounded-md mt-4">
@@ -163,29 +120,19 @@
                     <table class="w-full table-auto text-sm">
                         <thead>
                             <tr class="text-sm leading-normal">
-                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">요청번호</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">번호</th>
                                 <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">아이디</th>
                                 <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">URL</th>
                                 <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">요청시각</th>
-                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">진행상태</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% const sortedResults = results_info.sort((a, b) => b.num - a.num); %>
-                            <% sortedResults.forEach(result => { %>
+                            <% results_info.forEach(result => { %>
                                 <tr class="hover:bg-grey-lighter">
-                                    <td class="py-2 px-4 border-b border-grey-light"><%= result.num %></td>
+                                    <td class="py-2 px-4 border-b border-grey-light"><img src="https://via.placeholder.com/40" alt="Foto Perfil" class="rounded-full h-10 w-10"></td>
                                     <td class="py-2 px-4 border-b border-grey-light"><a href="#"><%= result.id %></a></td>
                                     <td class="py-2 px-4 border-b border-grey-light"><%= result.url %></td>
-                                    <td class="py-2 px-4 border-b border-grey-light"><%= result.date %>
-                                    </td>
-                                    <td class="py-2 px-4 border-b border-grey-light">
-                                        <% if (result.process === 'work') { %>
-                                            진행
-                                        <% } else if (result.process === 'done') { %>
-                                            완료
-                                        <% } %>
-                                    </td>
+                                    <td class="py-2 px-4 border-b border-grey-light"><%= result.date %></td>
                                 </tr>
                             <% }); %>
                         </tbody>

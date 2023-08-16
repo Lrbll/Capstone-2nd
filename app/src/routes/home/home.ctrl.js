@@ -22,9 +22,9 @@ const output = {
     });
   },
 
-  diagnostics: (req, res) => {
+  analysis: (req, res) => {
     const is_logined = req.session.is_logined;
-    res.render("home/diagnostics", { is_logined: is_logined });
+    res.render("home/analysis", { is_logined: is_logined });
   },
 
   list: (req, res) => {
@@ -145,10 +145,14 @@ const process = {
   runPython: (req, res) => {
     const id = req.session.nickname;
     const { url } = req.body;
+    const status1 = "work";
+    const status2 = "done";
     const date = moment().tz("Asia/Seoul").format("YYYY-MM-DD HH:mm:ss");
-    const query = `INSERT INTO results_info (id, url, date, results) VALUES ('${id}', '${url}', '${date}', '{}')`;
-
-    db.mysql.query(query, (error) => {
+    const query1 = `INSERT INTO results_info (id, url, date, results, process) VALUES ('${id}', '${url}', '${date}', '{}', '${status1}')`;
+    const query2 = `SELECT id, num FROM results_info WHERE id = ? ORDER BY num DESC LIMIT 1`;
+    const query3 = `UPDATE results_info SET process = ? WHERE id = ?`;
+    
+    db.mysql.query(query1, (error) => {
       if (error) {
         console.error("Failed to insert data:", error);
         res
@@ -166,15 +170,44 @@ const process = {
       pythonProcess.on("close", (code) => {
         if (code === 0) {
           // Python 스크립트 실행 성공
-          res.send(
-            `<script type="text/javascript">alert("점검이 완료되었습니다."); document.location.href="/result";</script>`
-          );
+          // 쿼리 실행
+          db.mysql.query(query2, [id], (selectError, selectResults) => {
+            if (selectError) {
+              console.error('Error selecting row:', selectError);
+              connection.end();
+              return;
+            }
+
+            if (selectResults.length === 0) {
+              console.log('No matching rows found');
+              connection.end();
+              return;
+            }
+
+            // 쿼리 실행
+            db.mysql.query(query3, [status2, id], (updateError, updateResults) => {
+              if (updateError) {
+                console.error('Error updating process:', updateError);
+                connection.end();
+                return;
+              }
+              res.send(
+                `<script type="text/javascript">alert("점검이 완료되었습니다."); document.location.href="/result";</script>`
+              );
+              if (updateResults.affectedRows > 0) {
+                console.log('Process updated successfully');
+              } else {
+                console.log('No rows updated');
+              }
+            });
+          });
         } else {
           // Python 스크립트 실행 실패
           res.send(
-            `<script type="text/javascript">alert("점검에 실패했습니다."); document.location.href="/diagnostics";</script>`
+            `<script type="text/javascript">alert("점검에 실패했습니다."); document.location.href="/analysis";</script>`
           );
         }
+        db.mysql.end();
       });
     });
   },
