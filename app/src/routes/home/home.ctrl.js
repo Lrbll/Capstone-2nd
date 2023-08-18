@@ -45,11 +45,6 @@ const output = {
     const is_logined = req.session.is_logined;
     res.render("home/info", { is_logined: is_logined });
   },
-
-  ask: (req, res) => {
-    const is_logined = req.session.is_logined;
-    res.render("home/ask", { is_logined: is_logined });
-  },
 };
 
 const process = {

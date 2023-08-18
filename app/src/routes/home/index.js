@@ -9,7 +9,6 @@ router.get("/", ctrl.output.home);
 router.get("/analysis", ctrl.output.analysis);
 router.get("/list", ctrl.output.list);
 router.get("/info", ctrl.output.info);
-router.get("/ask", ctrl.output.ask);
 
 router.post("/analysis", ctrl.process.confirmLogin);
 router.post("/analysis", ctrl.process.runPython);
