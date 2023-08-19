@@ -48,7 +48,7 @@ const output = {
     }
   },
 
-  user: (req, res) => {
+  userList: (req, res) => {
     const is_logined = req.session.is_logined;
     const is_who = req.session.is_who;
     
@@ -62,7 +62,7 @@ const output = {
           console.error('쿼리 실행 실패:', error1);
           return;
         }
-        res.render("home/Admin/userInfo", {
+        res.render("home/Admin/userList", {
           is_logined: is_logined,
           users: results1,
         });
@@ -73,7 +73,7 @@ const output = {
     }
   },
 
-  analysis: (req, res) => {
+  requestList: (req, res) => {
     const is_logined = req.session.is_logined;
     const is_who = req.session.is_who;
     
@@ -88,7 +88,7 @@ const output = {
           return;
         }
 
-        res.render("home/Admin/request", {
+        res.render("home/Admin/requestList", {
           is_logined: is_logined,
           results_info: results2
         });
@@ -97,7 +97,52 @@ const output = {
       res.send(`<script type="text/javascript">alert("접근할 수 없습니다."); 
               document.location.href="/";</script>`);
     }
-  }
+  },
+
+  userInfo: (req, res) => {
+    const is_logined = req.session.is_logined;
+    const user = req.params.user;
+    console.log(user);
+    // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
+    const query1 = `SELECT DISTINCT url FROM results_info WHERE id = '${user}'`;
+    const query2 = `SELECT * FROM users WHERE id = '${user}'`;
+    const query3 = `SELECT * FROM results_info WHERE id = '${user}'`;
+
+    db.mysql.query(query1, (error, results1) => {
+      if (error) {
+        console.error("Failed to fetch data:", error);
+        res
+          .status(500)
+          .json({ error: "서버 오류가 발생했습니다.", detail: error });
+        return;
+      } else {
+        db.mysql.query(query2, (error, results2) => {
+          if (error) {
+            console.error("Failed to fetch data:", error);
+            res
+              .status(500)
+              .json({ error: "서버 오류가 발생했습니다.", detail: error });
+            return;
+          } else {
+            db.mysql.query(query3, (error, results3) => {
+              if (error) {
+                console.error("Failed to fetch data:", error);
+                res
+                  .status(500)
+                  .json({ error: "서버 오류가 발생했습니다.", detail: error });
+                return;
+              }
+              // 결과에서 고유한 url 값들을 추출합니다.
+              const urls = results1.map((row) => row.url);
+              const userInfo = results2[0];
+              const resultsInfo = results3;
+              res.render("home/Admin/userInfo", { user, userInfo: userInfo, resultsInfo: resultsInfo, urls: urls, is_logined: is_logined });
+            });
+          }
+        });
+      }
+  });
+  },
 };
 
 const process = {

@@ -10,50 +10,53 @@
 <body>
 <div class="flex flex-col bg-neutral-400">
 
-    <!-- Barra de navegación superior -->
-    <div class="bg-zinc-800 text-white shadow w-full py-3.5 px-4 flex items-center justify-between">
-        <div class="flex items-center">
-            <div class="flex">
-                <img src="/img/JBU_logo.png" class="flex h-9 mx-2" alt="중부대 로고"/>
-                <a href="/">
-                    <img src="/img/Hook_logo.png" class="h-9 invert" alt="Hook 로고" />
-                </a>
-                <h2 class="font-bold text-2xl ml-6 my-auto"><a href="/admin">Admin Page</a></h2>
+    <!-- 헤더 영역 -->
+    <header>
+        <div class="bg-zinc-800 text-white shadow w-full py-3.5 px-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="flex">
+                    <img src="/img/JBU_logo.png" class="flex h-9 mx-2" alt="중부대 로고"/>
+                    <a href="/">
+                        <img src="/img/Hook_logo.png" class="h-9 invert" alt="Hook 로고" />
+                    </a>
+                    <h2 class="font-bold text-2xl ml-6 my-auto"><a href="/admin">Admin Page</a></h2>
+                </div>
+                <div class="md:hidden flex items-center"> <!-- Se muestra solo en dispositivos pequeños -->
+                    <button id="menuBtn">
+                        <i class="fas fa-bars text-gray-500 text-lg"></i> <!-- Ícono de menú -->
+                    </button>
+                </div>
             </div>
-            <div class="md:hidden flex items-center"> <!-- Se muestra solo en dispositivos pequeños -->
-                <button id="menuBtn">
-                    <i class="fas fa-bars text-gray-500 text-lg"></i> <!-- Ícono de menú -->
+    
+            <!-- Ícono de Notificación y Perfil -->
+            <div class="space-x-5">
+                <button>
+                    <i class="fas fa-bell text-gray-500 text-lg"></i>
+                </button>
+                <!-- Botón de Perfil -->
+                <button>
+                    <i class="fas fa-user text-gray-500 text-lg"></i>
                 </button>
             </div>
         </div>
-
-        <!-- Ícono de Notificación y Perfil -->
-        <div class="space-x-5">
-            <button>
-                <i class="fas fa-bell text-gray-500 text-lg"></i>
-            </button>
-            <!-- Botón de Perfil -->
-            <button>
-                <i class="fas fa-user text-gray-500 text-lg"></i>
-            </button>
-        </div>
-    </div>
+    </header>
+    
 
     <!-- Contenido principal -->
     <div class="flex-1 flex flex-wrap">
         <!-- Barra lateral de navegación (oculta en dispositivos pequeños) -->
         <div class="p-2 bg-neutral-900 w-full md:w-60 flex flex-col md:flex hidden" id="sideNav">
             <nav>
-                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="#">
+                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="/admin">
                     <i class="fas fa-home w-9"></i>전체보기
                 </a>
                 <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="#">
                     <i class="fas fa-file-alt w-9"></i>권한
                 </a>
-                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="#">
+                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="/admin/managemnt/user">
                     <i class="fas fa-users w-9"></i>회원 정보
                 </a>
-                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="#">
+                <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="/admin/managemnt/request">
                     <i class="fas fa-store w-9"></i>진단 요청
                 </a>
                 <a class="block text-neutral-50 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white" href="#">
@@ -113,7 +116,7 @@
 
             <!-- 회원정보 영역 -->
             <div class="mt-8 bg-white p-4 shadow rounded-lg">
-                <h2 class="text-gray-500 text-lg font-semibold pb-4">회원 정보</h2>
+                <h2 class="text-gray-500 text-lg font-semibold pb-4">회원정보</h2>
                 <div class="my-1"></div> <!-- Espacio de separación -->
                 <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div> <!-- Línea con gradiente -->
                 
@@ -129,25 +132,82 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% users.forEach(user => { %>
                         <tr class="hover:bg-grey-lighter">
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.num %></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><a href="#"><%= user.id %></a></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.user_name %></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.email %></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.company %></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><a href="">수정</a><a href="">탈퇴</a></td>
+                            <td class="py-2 px-4 border-b border-grey-light"><%= userInfo.num %></td>
+                            <td class="py-2 px-4 border-b border-grey-light"><a href="#"><%= userInfo.id %></a></td>
+                            <td class="py-2 px-4 border-b border-grey-light"><%= userInfo.user_name %></td>
+                            <td class="py-2 px-4 border-b border-grey-light"><%= userInfo.email %></td>
+                            <td class="py-2 px-4 border-b border-grey-light"><%= userInfo.company %></td>
+                            <td class="py-2 px-4 border-b border-grey-light">
+                                <form action="/admin/deleteUser" method="post">
+                                    <input type="hidden" name="user" value="<%= userInfo.id %>">
+                                    <button type="submit">탈퇴</button>
+                                </form>
+                            </td>
                         </tr>
-                        <% }); %>
                     </tbody>
                 </table>
-                <!-- Botón "Ver más" para la tabla de Autorizaciones Pendientes -->
-                <div class="text-right mt-4">
-                    <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2 px-4 rounded">
-                        버튼
-                    </button>
+            </div>
+
+            <!-- 진단요청 영역 -->
+            <div class="mt-8 bg-white p-4 shadow rounded-lg">
+                <div class="bg-white p-4 rounded-md mt-4">
+                    <h2 class="text-gray-500 text-lg font-semibold pb-4">진단 요청</h2>
+                    <div class="my-1"></div> <!-- Espacio de separación -->
+                    <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div> <!-- Línea con gradiente -->
+                    <table class="w-full table-auto text-sm">
+                        <thead>
+                            <tr class="text-sm leading-normal">
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">요청번호</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">URL</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">요청시각</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">진행상태</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% resultsInfo.forEach(result => { %>
+                                <tr class="hover:bg-grey-lighter">
+                                    <td class="py-2 px-4 border-b border-grey-light"><%= result.num %></td>
+                                    <td class="py-2 px-4 border-b border-grey-light"><%= result.url %></td>
+                                    <td class="py-2 px-4 border-b border-grey-light"><%= result.date %>
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-grey-light">
+                                        <% if (result.process === 'work') { %>
+                                            진행
+                                        <% } else if (result.process === 'done') { %>
+                                            완료
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
+            <!-- 진단목록 영역 -->
+            <div class="mt-8 bg-white p-4 shadow rounded-lg">
+                <h2 class="text-gray-500 text-lg font-semibold pb-4">웹사이트 목록</h2>
+                <p class="my-1 text-sm">전체 <span class="text-red-700"><%= urls.length %></span>개의 웹</p>
+                <div class="my-1"></div> <!-- Espacio de separación -->
+                <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div> <!-- Línea con gradiente -->
+                
+                <table class="w-full table-auto text-sm">
+                    <thead>
+                        <tr class="text-sm leading-normal">
+                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">address</th>
+                        </tr>
+                    </thead>
+                    <% urls.forEach(function(url) { %>
+                        <tbody>
+                            <tr class="hover:bg-grey-lighter">
+                                <td class="py-2 px-4 border-b border-grey-light"><a href="/result/<%= url %>"><%= url %></td>
+                            </tr>
+                        </tbody>
+                    <% }); %>
+                </table>
+            </div>
+            
         </div>
     </div>
 </div>
