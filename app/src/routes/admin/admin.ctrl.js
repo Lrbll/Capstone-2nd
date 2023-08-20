@@ -294,6 +294,28 @@ const process = {
       }
     );
   },
+
+  chartProcess: (req, res) => {
+    const query = "SELECT process, COUNT(*) as count FROM results_info GROUP BY process";
+    
+    db.mysql.query(query, (err, results) => {
+        if (err) {
+            console.error('Error querying database:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+            const processData = { work: 0, done: 0 };
+            
+            results.forEach(row => {
+                if (row.process === "work") {
+                    processData.work = row.count;
+                } else if (row.process === "done") {
+                    processData.done = row.count;
+                }
+            });
+            res.json(processData);
+        }
+    });
+  },
 };
 
 module.exports = {

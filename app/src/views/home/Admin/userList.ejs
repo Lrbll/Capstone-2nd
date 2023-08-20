@@ -6,6 +6,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Hook</title>
+
+    <!-- Adding dataTable style cdn -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- Adding JQuery cdn -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <!-- Adding dataTable cdn -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- metisMenu stylesheet -->
+    <link rel="stylesheet" href="./assets/lib/metismenu/metisMenu.css">
+    <!-- Initializing datatable -->
+    <script>        	
+        $(document).ready(function() {
+            $('table.display').DataTable();
+        });
+        // new DataTable('table.display');
+    </script>
 </head>
 <body>
 <div class="flex flex-col bg-neutral-400">
@@ -26,9 +42,11 @@
                 </button>
             </div>
         </div>
-        <a href="/auth/logout" class="block text-gray-500 py-2.5 px-4 my-2 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white mt-auto" href="#">
-            <i class="fas fa-sign-out-alt mr-2"></i>sign out
-        </a>
+        <form action="/auth/logout" method="post">
+            <button type="submit" class="block text-gray-500 py-2.5 px-4 my-2 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white mt-auto">
+                <i class="fas fa-sign-out-alt mr-2"></i>sign out
+            </button>
+        </form>
     </div>
 
     <!-- 콘텐츠 영역 -->
@@ -53,41 +71,52 @@
 
             <!-- 회원정보 영역 -->
             <div class="mt-8 bg-white p-4 shadow rounded-lg">
-                <h2 class="text-gray-500 text-lg font-semibold pb-4">회원 정보</h2>
-                <div class="my-1"></div> <!-- Espacio de separación -->
-                <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div> <!-- Línea con gradiente -->
-                
-                <table class="w-full table-auto text-sm">
-                    <thead>
-                        <tr class="text-sm leading-normal">
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원번호</th>
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">아이디</th>
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이름</th>
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이메일</th>
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">직장</th><td class="py-2 px-4 border-b border-grey-light">
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원관리</th><td class="py-2 px-4 border-b border-grey-light">
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% users.forEach(user => { %>
-                        <tr class="hover:bg-grey-lighter">
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.num %></td>
-                            <td class="py-2 px-4 border-b border-grey-light">
-                                <a href="/admin/show/userInfo/<%= user.id %>"><%= user.id %></a>
-                            </td>
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.user_name %></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.email %></td>
-                            <td class="py-2 px-4 border-b border-grey-light"><%= user.company %></td>
-                            <td>
-                                <form action="/admin/deleteUser" method="post">
-                                    <input type="hidden" name="user" value="<%= user.id %>">
-                                    <button type="submit">탈퇴</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
+                <div class="bg-white p-4 rounded-md mt-4">
+                    <h2 class="text-gray-500 text-lg font-semibold pb-4">회원 정보</h2>
+                    <div class="my-1 h-2"></div> <!-- Espacio de separación -->
+                    <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div> <!-- Línea con gradiente -->
+                    <table id="" class="display" style="width:100%">
+                        <thead>
+                            <tr class="text-sm leading-normal">
+                                <th class="w-10 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원번호</th>
+                                <th class="w-24 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">아이디</th>
+                                <th class="w-24 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이름</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이메일</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">직장</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원관리</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach(user => { %>
+                                <tr class="hover:bg-grey-lighter">
+                                    <td class="py-2 px-4 border-b border-grey-light"><%= user.num %></td>
+                                    <td class="py-2 px-4 border-b border-grey-light">
+                                        <a href="/admin/show/userInfo/<%= user.id %>"><%= user.id %></a>
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-grey-light"><%= user.user_name %></td>
+                                    <td class="py-2 px-4 border-b border-grey-light"><%= user.email %></td>
+                                    <td class="py-2 px-4 border-b border-grey-light"><%= user.company %></td>
+                                    <td>
+                                        <form action="/admin/deleteUser" method="post">
+                                            <input type="hidden" name="user" value="<%= user.id %>">
+                                            <button type="submit">탈퇴</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                        <tfoot>
+                            <tr class="text-sm leading-normal">
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원번호</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">아이디</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이름</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이메일</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">직장</th>
+                                <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원관리</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
