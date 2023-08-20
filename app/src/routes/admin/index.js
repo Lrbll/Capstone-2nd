@@ -10,6 +10,7 @@ router.get("/login", ctrl.output.adminLogin);
 router.get("/show/userList", ctrl.output.userList);
 router.get("/show/requestList", ctrl.output.requestList);
 router.get("/show/userInfo/:user", ctrl.output.userInfo);
+router.get("/show/userInfo/:user/:resultNumber", ctrl.output.resultInfo);
 
 router.post("/deleteUser", ctrl.process.deleteUser);
 router.post("/login", ctrl.process.login);

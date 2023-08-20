@@ -167,7 +167,9 @@
                         <tbody>
                             <% resultsInfo.forEach(result => { %>
                                 <tr class="hover:bg-grey-lighter">
-                                    <td class="py-2 px-4 border-b border-grey-light"><%= result.num %></td>
+                                    <td class="py-2 px-4 border-b border-grey-light">
+                                        <a href="/admin/show/userInfo/<%= userInfo.id %>/<%= result.num %>"><%= result.num %></a>
+                                    </td>
                                     <td class="py-2 px-4 border-b border-grey-light"><%= result.url %></td>
                                     <td class="py-2 px-4 border-b border-grey-light"><%= result.date %>
                                     </td>

@@ -125,7 +125,6 @@
                             <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이름</th>
                             <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이메일</th>
                             <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">직장</th>
-                            <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원관리</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,12 +137,6 @@
                             <td class="py-2 px-4 border-b border-grey-light"><%= user.user_name %></td>
                             <td class="py-2 px-4 border-b border-grey-light"><%= user.email %></td>
                             <td class="py-2 px-4 border-b border-grey-light"><%= user.company %></td>
-                            <td class="py-2 px-4 border-b border-grey-light">
-                                <form action="/admin/deleteUser" method="post">
-                                    <input type="hidden" name="user" value="<%= user.id %>">
-                                    <button type="submit">탈퇴</button>
-                                </form>
-                            </td>
                         </tr>
                         <% }); %>
                     </tbody>

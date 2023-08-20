@@ -1,5 +1,7 @@
 "use strict";
 let db = require("../../config/db");
+const moment = require("moment-timezone");
+const fs = require("fs");
 
 const output = {
   admin: (req, res) => {
@@ -142,6 +144,105 @@ const output = {
         });
       }
   });
+  },
+  
+  resultInfo: (req, res) => {
+    const is_logined = req.session.is_logined;
+    const user = req.params.user;
+    const resultNumber = req.params.resultNumber;
+    console.log(user);
+
+    // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
+    const query = `SELECT url, results, DATE_FORMAT(date, "%Y-%m-%d %H:%i:%s") AS formattedDate
+    FROM results_info 
+    WHERE num = '${resultNumber}'`;
+
+    db.mysql.query(query, (err, results) => {
+      if (err) {
+        console.error("Error querying the database:", err);
+        res.status(500).send("Internal Server Error");
+        return;
+      }
+
+      if (results.length === 0) {
+        // 해당하는 결과가 없는 경우 처리
+        res.status(404).send("Results not found");
+        return;
+      }
+
+      // 첫 번째 행의 결과
+      const formattedDate1 = moment(results[0].formattedDate).format(
+        "YYYY-MM-DD"
+      );
+      const url = results[0].url;
+      const jsonData1 = JSON.parse(results[0].results);
+      const {
+        AE: AE1,
+        BA: BA1,
+        BF: BF1,
+        BS: BS1,
+        DL: DL1,
+        SF: SF1,
+        SM: SM1,
+        DOR: DOR1,
+        RFA: RFA1,
+        XSS: XSS1,
+        Base: Base1,
+        CSRF: CSRF1,
+        LDAP: LDAP1,
+        Cookie: Cookie1,
+        PHP_CI: PHP_CI1,
+        Redirect: Redirect1,
+        SI_Login: SI_Login1,
+        SI_Search: SI_Search1,
+        XML_XPATH: XML_XPATH1,
+        XSS_Stored: XSS_Stored1,
+      } = jsonData1;
+
+      const riskKeys = Object.keys(jsonData1).filter(
+        (key) => jsonData1[key] === "risk"
+      );
+
+      // 파일에서 점검항목 info 가져오기
+      fs.readFile("src/scripts_info/scripts.json", "utf8", (err, data) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("Error reading JSON file");
+          return;
+        }
+
+        const scripts = JSON.parse(data);
+        console.log(url);
+        res.render("home/Admin/resultInfo", {
+          is_logined: is_logined,
+          url,
+          user: user,
+          formattedDate1,
+          scripts: scripts,
+          riskKeys,
+          AE1,
+          BA1,
+          BF1,
+          BS1,
+          DL1,
+          SF1,
+          SM1,
+          DOR1,
+          RFA1,
+          XSS1,
+          Base1,
+          CSRF1,
+          LDAP1,
+          Cookie1,
+          PHP_CI1,
+          Redirect1,
+          SI_Login1,
+          SI_Search1,
+          XML_XPATH1,
+          XSS_Stored1,
+        });
+      });
+    });
   },
 };
 
