@@ -8,6 +8,7 @@ const moment = require("moment-timezone");
 // url에 대한 페이지 처리 로직을 담당하는 핸들러 함수
 const urlHandler = (req, res, url) => {
   const is_logined = req.session.is_logined;
+  const is_who = req.session.is_who;
   const url_address = url;
 
   // url에 해당하는 페이지 처리 로직
@@ -125,6 +126,7 @@ const urlHandler = (req, res, url) => {
 
       res.render("home/result2", {
         is_logined: is_logined,
+        is_who: is_who,
         url_address,
         formattedDate1,
         scripts: scripts,
@@ -176,6 +178,7 @@ const urlHandler = (req, res, url) => {
 
 router.get("/", (req, res) => {
   const is_logined = req.session.is_logined;
+  const is_who = req.session.is_who;
   const nickname = req.session.nickname;
 
   // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
@@ -202,6 +205,7 @@ router.get("/", (req, res) => {
 
     res.render("home/result", {
       is_logined: is_logined,
+      is_who: is_who,
       urls: urls,
     });
   });

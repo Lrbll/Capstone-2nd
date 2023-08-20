@@ -20,7 +20,7 @@
   <body>
     <!-- 헤더 영역 -->
     <header class="fixed w-full shadow-md z-10">
-      <nav class="bg-white border-gray-200 py-2.5">
+      <nav class="bg-white border-gray-200 py-3.5">
         <div
           class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
         >
@@ -35,7 +35,7 @@
             </a>
           </div>
           <div
-            class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"
+            class="mr-9 items-center justify-around hidden w-full lg:flex lg:w-auto"
           >
             <ul
               class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 ml-20 lg:mt-0"
@@ -43,7 +43,7 @@
               <li>
                 <button
                   onclick="scrollToSection('about_section')"
-                  class="py-2 px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
+                  class="px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
                 >
                   About
                 </button>
@@ -51,7 +51,7 @@
               <li>
                 <button
                   onclick="scrollToSection('project_section')"
-                  class="py-2 px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
+                  class="px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
                 >
                   Project
                 </button>
@@ -59,40 +59,13 @@
               <li>
                 <button
                   onclick="scrollToSection('contact_section')"
-                  class="py-2 px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
+                  class="px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
                 >
                   Contact
                 </button>
               </li>
             </ul>
           </div>
-          <% if (is_logined) { %>
-          <form
-            class="flex items-center lg:order-2 order-last"
-            action="/auth/logout"
-            method="post"
-          >
-            <button
-              type="submit"
-              class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs shadow-md px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0"
-            >
-              로그아웃
-            </button>
-          </form>
-          <% } else { %>
-          <div class="flex items-center lg:order-2">
-            <a
-              href="/auth/login"
-              class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs shadow-md px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0"
-              >로그인</a
-            >
-            <a
-              href="/auth/register"
-              class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs shadow-md px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 ml-1"
-              >회원가입</a
-            >
-          </div>
-          <% } %>
         </div>
       </nav>
     </header>
@@ -106,7 +79,7 @@
           About
         </div>
       </div>
-      <div class="container mx-auto flex flex-wrap px-8">
+      <div class="w-11/12 container mx-auto flex flex-wrap px-8">
         <div class="w-full md:w-[36px] flex flex-col flex-grow flex-shrink">
           <div
             class="flex-1 bg-white rounded-2xl px-8 py-6 shadow-lg text-center mx-7 my-4"
@@ -231,7 +204,7 @@
           </div>
           <div class="w-full lg:w-1/2 p-6 mt-3">
             <div class="align-middle">
-              <img src="./img/profile.png" class="w-64 h-72 mx-auto" />
+              <img src="./img/Hook_img.png" class="w-80 mx-auto" />
             </div>
           </div>
           <div class="w-full lg:w-1/2 p-6 mt-3 text-sm">
@@ -314,14 +287,35 @@
         >
           Contact Us
         </div>
-        <div class="text-center text-black mt-10">
-          <p class="mt-10">Phone<br />010-8109-2930</p>
-          <p class="mt-10">Email<br />ekdus207@naver.com</p>
-          <p class="mt-10">
-            <a href="https://github.com/Lrbll" class="hover:text-gray-600"
-              >Go to Github</a
-            >
-          </p>
+        <div class="mt-10 flex flex-col flex-wrap justify-around items-center lg:flex-row">
+          <div class="flex flex-col w-36 my-10">
+            <img src="./img/youjin.png" class="w-10 rounded-full border-2 border-gray-500">
+            <p class="mt-6 font-semibold">instagram</p>
+            <p class="text-sm"><a href="https://www.instagram.com/eukkgeon"><img src="./img/instagram_icon.png" class="inline w-5" alt="">  @eukkgeon</a></p>
+            <p class="mt-6 font-semibold">email</p>
+            <p class="text-sm">lhwjbu@naver.com</p>
+          </div>
+          <div class="flex flex-col w-36 my-10">
+            <img src="./img/jiwon.png" class="w-10 rounded-full border-2 border-gray-500">
+            <p class="mt-6 font-semibold">instagram</p>
+            <p class="text-sm"><a href="https://www.instagram.com/sweetpea_wony"><img src="./img/instagram_icon.png" class="inline w-5" alt="">  @sweetpea_wony</a></p>
+            <p class="mt-6 font-semibold">email</p>
+            <p class="text-sm">lhwjbu@naver.com</p>
+          </div>
+          <div class="flex flex-col w-36 my-10">
+            <img src="./img/harin.png" class="w-10 rounded-full border-2 border-gray-500">
+            <p class="mt-6 font-semibold">instagram</p>
+            <p class="text-sm"><a href="https://www.instagram.com/sour_harin"><img src="./img/instagram_icon.png" class="inline w-5" alt="">  @sour_harin</a></p>
+            <p class="mt-6 font-semibold">email</p>
+            <p class="text-sm">loyal1127@naver.com</p>
+          </div>
+          <div class="flex flex-col w-36 my-10">
+            <img src="./img/dayeon.png" class="w-10 rounded-full border-2 border-gray-500">
+            <p class="mt-6 font-semibold">instagram</p>
+            <p class="text-sm"><a href="https://www.instagram.com/lxxlrbll"><img src="./img/instagram_icon.png" class="inline w-5" alt="">  @lxxlrbll</a></p>
+            <p class="mt-6 font-semibold">email</p>
+            <p class="text-sm">dlxkdxs@naver.com</p>
+          </div>
         </div>
       </div>
     </section>
@@ -343,7 +337,7 @@
               class="text-gray-900 hover:text-green-700 md:mb-6"
               >진단서비스</a
             >
-            <ul class="list-none text-xs mb-6">
+            <ul class="list-none text-xs mb-6 cursor-default">
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
                 <p class="text-gray-500">진단도구</p>
               </li>
@@ -356,7 +350,7 @@
             <a href="/list" class="text-gray-900 hover:text-green-700 md:mb-6"
               >점검항목</a
             >
-            <ul class="list-none text-xs mb-6">
+            <ul class="list-none text-xs mb-6 cursor-default">
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
                 <p class="text-gray-500">웹취약점</p>
               </li>
@@ -366,7 +360,7 @@
             <a href="/result" class="text-gray-900 hover:text-green-700 md:mb-6"
               >진단결과</a
             >
-            <ul class="list-none text-xs mb-6">
+            <ul class="list-none text-xs mb-6 cursor-default">
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
                 <p class="text-gray-500">진단결과</p>
               </li>
@@ -377,9 +371,9 @@
           </div>
           <div class="flex-1">
             <a href="/info" class="text-gray-900 hover:text-green-700 md:mb-6"
-              >프로젝트 소개</a
+              >프로젝트소개</a
             >
-            <ul class="list-none text-xs mb-6">
+            <ul class="list-none text-xs mb-6 cursor-default">
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
                 <p class="text-gray-500">about</p>
               </li>

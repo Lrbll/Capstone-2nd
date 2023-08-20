@@ -2,7 +2,6 @@
 
 let db = require("../../config/db");
 const authCheck = require("../../public/js/home/authCheck")
-const readline = require('readline');
 
 const output = {
   login: (req, res) => {
@@ -15,7 +14,20 @@ const output = {
 
   mypage: (req, res) => {
     const is_logined = req.session.is_logined;
-    res.render("home/mypage", { is_logined: is_logined });
+    const is_who = req.session.is_who;
+    const id = req.session.nickname;
+
+    db.mysql.query(`SELECT * FROM users WHERE id = '${id}'`, (error, results) => {
+      if (error) {
+        console.error("Failed to fetch data:", error);
+        res
+          .status(500)
+          .json({ error: "서버 오류가 발생했습니다.", detail: error });
+        return;
+      }
+      const result = results[0];
+      res.render("home/mypage", { is_logined: is_logined, is_who: is_who, result: result });
+    });
   },
 };
 
