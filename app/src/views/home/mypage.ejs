@@ -120,6 +120,19 @@
     </header>
 
     <!-- 섹션 영역 -->
+    <% if (is_who == "admin") { %>
+    <section class="bg-gray-100 h-[100vh] flex flex-col justify-center">
+      <div
+        class="w-3/4 h-[400px] flex flex-col items-center justify-center px-6 py-8 my-auto mx-auto lg:py-0"
+      >
+        <div class="w-full bg-white rounded-lg shadow sm:max-w-md xl:p-0">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <p>안녕하세요, 관리자님!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <% } else { %>
     <section class="bg-gray-100 h-[140vh] flex flex-col justify-center">
       <div
         class="w-3/4 h-[400px] flex flex-col items-center justify-center px-6 py-8 my-auto mx-auto lg:py-0"
@@ -127,70 +140,73 @@
         <div class="w-full bg-white rounded-lg shadow sm:max-w-md xl:p-0">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
             <p class="text-2xl font-semibold text-gray-800">기본 정보</p>
-            <ul class="list-none p-0 text-gray-700">
-              <li class="my-5">
-                <div class="flex">
-                  <div class="my-auto text-[30px] text-black"><i class="fa-solid fa-user"></i></div>
-                  <div class="ml-1">
-                    <p class="text-xl font-semibold text-gray-900"><%= result.user_name %></p>
-                    <p class="text-sm text-gray-600 ml-2"><%= result.id %></p>
+              
+                <ul class="list-none p-0 text-gray-700">
+                  <li class="my-5">
+                    <div class="flex">
+                      <div class="my-auto text-[30px] text-black"><i class="fa-solid fa-user"></i></div>
+                      <div class="ml-1">
+                        <p class="text-xl font-semibold text-gray-900"><%= result.user_name %></p>
+                        <p class="text-sm text-gray-600 ml-2"><%= result.id %></p>
+                      </div>
+                    </div>
+                    
+                  </li>
+                  <li class="my-2"><i class="fa-solid fa-envelope"></i><span class="ml-2"><%= result.email %></span></li>
+                  <li class="my-2"><i class="fa-solid fa-briefcase"></i><span class="ml-2"><%= result.company %></span></li>
+                </ul>
+                <div class="border-b border-gray-600"></div>
+                <p class="text-xl font-semibold text-gray-800">비밀번호 변경</p>
+                <!-- register 라우터로 post요청 보냄 -->
+                <form
+                  class="space-y-4 md:space-y-6"
+                  action="/auth/mypage"
+                  method="post"
+                >
+                  <div>
+                    <input
+                      type="password"
+                      name="pw"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                      placeholder="현재 비밀번호"
+                    />
                   </div>
-                </div>
-                
-              </li>
-              <li class="my-2"><i class="fa-solid fa-envelope"></i><span class="ml-2"><%= result.email %></span></li>
-              <li class="my-2"><i class="fa-solid fa-briefcase"></i><span class="ml-2"><%= result.company %></span></li>
-            </ul>
-            <div class="border-b border-gray-600"></div>
-            <p class="text-xl font-semibold text-gray-800">비밀번호 변경</p>
-            <!-- register 라우터로 post요청 보냄 -->
-            <form
-              class="space-y-4 md:space-y-6"
-              action="/auth/mypage"
-              method="post"
-            >
-              <div>
-                <input
-                  type="password"
-                  name="pw"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="현재 비밀번호"
-                />
-              </div>
-              <div>
-                <input
-                  type="password"
-                  name="new_pw"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="새로운 비밀번호"
-                />
-              </div>
-              <div>
-                <input
-                  type="password"
-                  name="confirm_pw"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="비밀번호 재확인"
-                />
-              </div>
-              <button
-                type="submit"
-                class="w-full text-white bg-green-700 hover:bg-green-900 focus:ring-2 focus:ring-green-500 rounded-lg text-sm px-5 py-2.5 text-center"
-              >
-                회원정보 수정
-              </button>
-            </form>
-            <form
-              action="/auth/deleteAccount"
-              method="post"
-              class="text-sm text-gray-700 hover:underline"
-            >
-              <button type="submit">회원탈퇴</button>
-            </form>
+                  <div>
+                    <input
+                      type="password"
+                      name="new_pw"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                      placeholder="새로운 비밀번호"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="password"
+                      name="confirm_pw"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                      placeholder="비밀번호 재확인"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    class="w-full text-white bg-green-700 hover:bg-green-900 focus:ring-2 focus:ring-green-500 rounded-lg text-sm px-5 py-2.5 text-center"
+                  >
+                    회원정보 수정
+                  </button>
+                </form>
+                <form
+                  action="/auth/deleteAccount"
+                  method="post"
+                  class="text-sm text-gray-700 hover:underline"
+                >
+                  <button type="submit">회원탈퇴</button>
+                </form>
+              
           </div>
         </div>
       </div>
     </section>
+    <% } %>
     <!--Footer-->
     <footer class="bg-white">
       <div class="container mx-auto px-8">
