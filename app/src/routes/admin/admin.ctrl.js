@@ -103,146 +103,161 @@ const output = {
 
   userInfo: (req, res) => {
     const is_logined = req.session.is_logined;
+    const is_who = req.session.is_who;
     const user = req.params.user;
     console.log(user);
-    // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
-    const query1 = `SELECT DISTINCT url FROM results_info WHERE id = '${user}'`;
-    const query2 = `SELECT * FROM users WHERE id = '${user}'`;
-    const query3 = `SELECT * FROM results_info WHERE id = '${user}'`;
 
-    db.mysql.query(query1, (error, results1) => {
-      if (error) {
-        console.error("Failed to fetch data:", error);
-        res
-          .status(500)
-          .json({ error: "서버 오류가 발생했습니다.", detail: error });
-        return;
-      } else {
-        db.mysql.query(query2, (error, results2) => {
-          if (error) {
-            console.error("Failed to fetch data:", error);
-            res
-              .status(500)
-              .json({ error: "서버 오류가 발생했습니다.", detail: error });
-            return;
-          } else {
-            db.mysql.query(query3, (error, results3) => {
-              if (error) {
-                console.error("Failed to fetch data:", error);
-                res
-                  .status(500)
-                  .json({ error: "서버 오류가 발생했습니다.", detail: error });
-                return;
-              }
-              // 결과에서 고유한 url 값들을 추출합니다.
-              const urls = results1.map((row) => row.url);
-              const userInfo = results2[0];
-              const resultsInfo = results3;
-              res.render("home/Admin/userInfo", { user, userInfo: userInfo, resultsInfo: resultsInfo, urls: urls, is_logined: is_logined });
-            });
-          }
-        });
-      }
-  });
+    if (is_who == "admin") {
+      // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
+      const query1 = `SELECT DISTINCT url FROM results_info WHERE id = '${user}'`;
+      const query2 = `SELECT * FROM users WHERE id = '${user}'`;
+      const query3 = `SELECT * FROM results_info WHERE id = '${user}'`;
+
+      db.mysql.query(query1, (error, results1) => {
+        if (error) {
+          console.error("Failed to fetch data:", error);
+          res
+            .status(500)
+            .json({ error: "서버 오류가 발생했습니다.", detail: error });
+          return;
+        } else {
+          db.mysql.query(query2, (error, results2) => {
+            if (error) {
+              console.error("Failed to fetch data:", error);
+              res
+                .status(500)
+                .json({ error: "서버 오류가 발생했습니다.", detail: error });
+              return;
+            } else {
+              db.mysql.query(query3, (error, results3) => {
+                if (error) {
+                  console.error("Failed to fetch data:", error);
+                  res
+                    .status(500)
+                    .json({ error: "서버 오류가 발생했습니다.", detail: error });
+                  return;
+                }
+                // 결과에서 고유한 url 값들을 추출합니다.
+                const urls = results1.map((row) => row.url);
+                const userInfo = results2[0];
+                const resultsInfo = results3;
+                res.render("home/Admin/userInfo", {
+                  user, userInfo: userInfo, resultsInfo: resultsInfo, urls: urls, is_logined: is_logined, is_who: is_who });
+              });
+            }
+          });
+        }
+      });
+    } else {
+      res.send(`<script type="text/javascript">alert("접근할 수 없습니다."); 
+              document.location.href="/";</script>`);
+    }
   },
   
   resultInfo: (req, res) => {
     const is_logined = req.session.is_logined;
+    const is_who = req.session.is_who;
     const user = req.params.user;
     const resultNumber = req.params.resultNumber;
     console.log(user);
 
-    // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
-    const query = `SELECT url, results, DATE_FORMAT(date, "%Y-%m-%d %H:%i:%s") AS formattedDate
-    FROM results_info 
-    WHERE num = '${resultNumber}'`;
+    if (is_who == "admin") {
+      // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
+      const query = `SELECT url, results, DATE_FORMAT(date, "%Y-%m-%d %H:%i:%s") AS formattedDate
+      FROM results_info 
+      WHERE num = '${resultNumber}'`;
 
-    db.mysql.query(query, (err, results) => {
-      if (err) {
-        console.error("Error querying the database:", err);
-        res.status(500).send("Internal Server Error");
-        return;
-      }
-
-      if (results.length === 0) {
-        // 해당하는 결과가 없는 경우 처리
-        res.status(404).send("Results not found");
-        return;
-      }
-
-      // 첫 번째 행의 결과
-      const formattedDate1 = moment(results[0].formattedDate).format(
-        "YYYY-MM-DD"
-      );
-      const url = results[0].url;
-      const jsonData1 = JSON.parse(results[0].results);
-      const {
-        AE: AE1,
-        BA: BA1,
-        BF: BF1,
-        BS: BS1,
-        DL: DL1,
-        SF: SF1,
-        SM: SM1,
-        DOR: DOR1,
-        RFA: RFA1,
-        XSS: XSS1,
-        Base: Base1,
-        CSRF: CSRF1,
-        LDAP: LDAP1,
-        Cookie: Cookie1,
-        PHP_CI: PHP_CI1,
-        Redirect: Redirect1,
-        SI_Login: SI_Login1,
-        SI_Search: SI_Search1,
-        XML_XPATH: XML_XPATH1,
-        XSS_Stored: XSS_Stored1,
-      } = jsonData1;
-
-      const riskKeys = Object.keys(jsonData1).filter(
-        (key) => jsonData1[key] === "risk"
-      );
-
-      // 파일에서 점검항목 info 가져오기
-      fs.readFile("src/scripts_info/scripts.json", "utf8", (err, data) => {
+      db.mysql.query(query, (err, results) => {
         if (err) {
-          console.error(err);
-          res.status(500).send("Error reading JSON file");
+          console.error("Error querying the database:", err);
+          res.status(500).send("Internal Server Error");
           return;
         }
 
-        const scripts = JSON.parse(data);
-        console.log(url);
-        res.render("home/Admin/resultInfo", {
-          is_logined: is_logined,
-          url,
-          user: user,
-          formattedDate1,
-          scripts: scripts,
-          riskKeys,
-          AE1,
-          BA1,
-          BF1,
-          BS1,
-          DL1,
-          SF1,
-          SM1,
-          DOR1,
-          RFA1,
-          XSS1,
-          Base1,
-          CSRF1,
-          LDAP1,
-          Cookie1,
-          PHP_CI1,
-          Redirect1,
-          SI_Login1,
-          SI_Search1,
-          XML_XPATH1,
-          XSS_Stored1,
+        if (results.length === 0) {
+          // 해당하는 결과가 없는 경우 처리
+          res.status(404).send("Results not found");
+          return;
+        }
+
+        // 첫 번째 행의 결과
+        const formattedDate1 = moment(results[0].formattedDate).format(
+          "YYYY-MM-DD"
+        );
+        const url = results[0].url;
+        const jsonData1 = JSON.parse(results[0].results);
+        const {
+          AE: AE1,
+          BA: BA1,
+          BF: BF1,
+          BS: BS1,
+          DL: DL1,
+          SF: SF1,
+          SM: SM1,
+          DOR: DOR1,
+          RFA: RFA1,
+          XSS: XSS1,
+          Base: Base1,
+          CSRF: CSRF1,
+          LDAP: LDAP1,
+          Cookie: Cookie1,
+          PHP_CI: PHP_CI1,
+          Redirect: Redirect1,
+          SI_Login: SI_Login1,
+          SI_Search: SI_Search1,
+          XML_XPATH: XML_XPATH1,
+          XSS_Stored: XSS_Stored1,
+        } = jsonData1;
+
+        const riskKeys = Object.keys(jsonData1).filter(
+          (key) => jsonData1[key] === "risk"
+        );
+
+        // 파일에서 점검항목 info 가져오기
+        fs.readFile("src/scripts_info/scripts.json", "utf8", (err, data) => {
+          if (err) {
+            console.error(err);
+            res.status(500).send("Error reading JSON file");
+            return;
+          }
+
+          const scripts = JSON.parse(data);
+          console.log(url);
+          res.render("home/Admin/resultInfo", {
+            is_logined: is_logined,
+            is_who: is_who,
+            url,
+            user: user,
+            formattedDate1,
+            scripts: scripts,
+            riskKeys,
+            AE1,
+            BA1,
+            BF1,
+            BS1,
+            DL1,
+            SF1,
+            SM1,
+            DOR1,
+            RFA1,
+            XSS1,
+            Base1,
+            CSRF1,
+            LDAP1,
+            Cookie1,
+            PHP_CI1,
+            Redirect1,
+            SI_Login1,
+            SI_Search1,
+            XML_XPATH1,
+            XSS_Stored1,
+          });
         });
       });
-    });
+    } else {
+      res.send(`<script type="text/javascript">alert("접근할 수 없습니다."); 
+              document.location.href="/";</script>`);
+    }
   },
 };
 
@@ -341,7 +356,6 @@ const process = {
             });
             const percentages = calculatePercentage(values.work, values.done); // 수정된 부분
             res.json(percentages);
-            console.log(percentages);
         }
     });
   },
