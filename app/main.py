@@ -385,7 +385,7 @@ def Redirect(url):
     for option in options:
         value = option.get_attribute("value")  # get_attribute : 특정 요소의 값 반환
         # 속성값을 value에 저장  #주소들이 저장됨
-        if value != "http://192.168.182.129/bWAPPuser_extra.php":
+        if value != "http://192.168.182.129/bWAPP/user_extra.php":
             driver.execute_script(
                 "arguments[0].value = 'http://192.168.182.129/bWAPP/user_extra.php'",
                 option,

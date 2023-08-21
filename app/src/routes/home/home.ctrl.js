@@ -149,7 +149,9 @@ const process = {
     const query1 = `INSERT INTO results_info (id, url, date, results, process) VALUES ('${id}', '${url}', '${date}', '{}', '${status1}')`;
     const query2 = `SELECT id, num FROM results_info WHERE id = ? ORDER BY num DESC LIMIT 1`;
     const query3 = `UPDATE results_info SET process = ? WHERE id = ?`;
-    
+    console.log(id);
+    console.log(url);
+    console.log(date);
     db.mysql.query(query1, (error) => {
       if (error) {
         console.error("Failed to insert data:", error);
@@ -159,7 +161,7 @@ const process = {
         return;
       }
 
-      const pythonProcess = spawn("venv\\Scripts\\python", [
+      const pythonProcess = spawn("C:\\capstone\\app\\venv\\Scripts\\python", [
         "main.py",
         req.session.nickname,
         url,
@@ -169,25 +171,28 @@ const process = {
         if (code === 0) {
           // Python 스크립트 실행 성공
           // 쿼리 실행
-          db.mysql.query(query2, [id], (selectError, selectResults) => {
+          db.mysql.query(query2, [id], (selectError, selectResults1) => {
             if (selectError) {
               console.error('Error selecting row:', selectError);
-              connection.end();
-              return;
+              res.send(
+                `<script type="text/javascript">alert("1 점검에 실패했습니다."); document.location.href="/analysis";</script>`
+              );
             }
 
-            if (selectResults.length === 0) {
+            if (selectResults1.length === 0) {
               console.log('No matching rows found');
-              connection.end();
-              return;
+              res.send(
+                `<script type="text/javascript">alert("2 점검에 실패했습니다."); document.location.href="/analysis";</script>`
+              );
             }
 
             // 쿼리 실행
             db.mysql.query(query3, [status2, id], (updateError, updateResults) => {
               if (updateError) {
                 console.error('Error updating process:', updateError);
-                connection.end();
-                return;
+                res.send(
+                  `<script type="text/javascript">alert("3 점검에 실패했습니다."); document.location.href="/analysis";</script>`
+                );
               }
               res.send(
                 `<script type="text/javascript">alert("점검이 완료되었습니다."); document.location.href="/result";</script>`
@@ -205,7 +210,6 @@ const process = {
             `<script type="text/javascript">alert("점검에 실패했습니다."); document.location.href="/analysis";</script>`
           );
         }
-        db.mysql.end();
       });
     });
   },

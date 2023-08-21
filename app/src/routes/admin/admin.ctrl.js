@@ -295,7 +295,7 @@ const process = {
     );
   },
 
-  chartProcess: (req, res) => {
+  chartProcess1: (req, res) => {
     const query = "SELECT process, COUNT(*) as count FROM results_info GROUP BY process";
     
     db.mysql.query(query, (err, results) => {
@@ -313,6 +313,35 @@ const process = {
                 }
             });
             res.json(processData);
+        }
+    });
+  },
+
+  chartProcess2: (req, res) => {
+    function calculatePercentage(value1, value2) {
+      const total = value1 + value2;
+      const percentage1 = (value1 / total) * 100;
+      const percentage2 = (value2 / total) * 100;
+      return [percentage1, percentage2];
+    }
+    const query = "SELECT process, COUNT(*) as count FROM results_info GROUP BY process";
+    
+    db.mysql.query(query, (err, results) => {
+        if (err) {
+            console.error('Error querying database:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+            const values = { work: 0, done: 0 };
+            results.forEach(row => {
+                if (row.process === "work") {
+                  values.work = row.count;
+                } else if (row.process === "done") {
+                  values.done = row.count;
+                }
+            });
+            const percentages = calculatePercentage(values.work, values.done); // 수정된 부분
+            res.json(percentages);
+            console.log(percentages);
         }
     });
   },
