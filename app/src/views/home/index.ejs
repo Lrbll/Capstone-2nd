@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/img/Hook_favicon.ico" type="image/x-icon">
     <title>Hook</title>
     <script src="/js/home/authCheck.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,19 +28,17 @@
 
   <body class="leading-normal tracking-normal text-white gradient">
     <!-- 헤더 영역 -->
-    <header class="fixed w-full shadow-md z-10">
-      <nav class="bg-white border-gray-200 py-3.5">
+    <header class="fixed z-10 bg-white w-full h-20 shadow-lg border-gray-200 py-4">
+      <nav class="">
         <div
           class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
         >
           <div class="flex">
-            <img
-              src="/img/JBU_logo.png"
-              class="flex h-9 mx-2"
-              alt="중부대 로고"
-            />
-            <a href="/">
-              <img src="/img/Hook_logo.png" class="h-9" alt="Hook 로고" />
+            <a href="https://www.joongbu.ac.kr/is/" class="block my-auto">
+              <img src="/img/JBU_logo.png" class="h-12 mx-2" alt="중부대 로고" />
+            </a>
+            <a href="/" class="block my-auto">
+              <img src="/img/Hook_logo.png" class="h-10 mx-1" alt="Hook 로고" />
             </a>
           </div>
           <% if (is_logined) { %>
@@ -80,7 +79,7 @@
               <li>
                 <a
                   href="/"
-                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block px-4 text-xl font-medium text-gray-700 hover:text-green-700 hover:transition-all hover:duration-300"
                   aria-current="page"
                   >홈</a
                 >
@@ -89,21 +88,21 @@
               <li>
                 <a
                   href="/analysis"
-                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block px-4 text-xl font-medium text-gray-700 hover:text-green-700 hover:transition-all hover:duration-300"
                   >진단서비스</a
                 >
               </li>
               <li>
                 <a
                   href="/list"
-                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block px-4 text-xl font-medium text-gray-700 hover:text-green-700 hover:transition-all hover:duration-300"
                   >점검항목</a
                 >
               </li>
               <li>
                 <a
                   href="/result"
-                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block px-4 text-xl font-medium text-gray-700 hover:text-green-700 hover:transition-all hover:duration-300"
                   >진단결과</a
                 >
               </li>
@@ -111,7 +110,7 @@
               <li>
                 <a
                   href="/auth/mypage"
-                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block px-4 text-xl font-medium text-gray-700 hover:text-green-700 hover:transition-all hover:duration-300"
                   >나의정보</a
                 >
               </li>
@@ -123,36 +122,36 @@
     </header>
 
     <!--진단서비스 영역-->
-    <div class="pt-24">
-      <div
-        class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center"
-      >
-        <!--Left Col-->
+    <div class="pt-28 pb-10">
+      <div class="w-11/12 container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+        <!--left Col-->
+        <div class="w-full md:w-1/2 text-center">
+          <img class="w-96 z-50 mx-auto" src="/img/Hook55.png" />
+        </div>
+        <!--right Col-->
         <div
-          class="flex flex-col w-full justify-center items-start text-center md:text-left"
+          class="flex flex-col w-full md:w-1/2 py-8 justify-center items-center md:items-start text-center md:text-left
+          transition-all duration-[1500ms] ease-in-out transform translate-y-20 opacity-0"
         >
-          <p class="uppercase tracking-loose w-full">
+          <p class="uppercase tracking-loose mx-5">
             웹사이트의 보안이 걱정되시나요?
           </p>
-          <h1 class="my-4 text-5xl font-bold leading-tight">
-            웹 취약점을 진단하고 <br />
-            보안을 강화해보세요!
+          <h1 class="my-4 text-5xl font-semibold leading-tight mx-5">
+            <span class="text-gray-900">웹 취약점</span>을 <span class="text-gray-700"></span>진단하고 <br />
+            <span class="text-gray-900">보안</span>을 강화해보세요!
           </h1>
           <button
             type="button"
             onclick="location.href='/analysis'"
-            class="mx-auto lg:mx-0 hover:underline hover:underline-offset-2 bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+            class="mx-auto lg:mx-5 hover:underline hover:underline-offset-2 bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
           >
-            웹 취약점 진단
+            취약점진단 하러가기
           </button>
-          <p class="leading-normal text-2xl mb-8">
+          <p class="leading-normal text-2xl mb-8 mx-5">
             진단결과와 대응방안까지 확인하세요
           </p>
         </div>
-        <!--Right Col-->
-        <div class="w-full md:w-3/5 py-6 text-center">
-          <!-- <img class="w-full md:w-4/5 z-50" src="hero.png" /> -->
-        </div>
+        
       </div>
     </div>
     <div class="relative -mt-12 lg:-mt-24">
@@ -195,17 +194,18 @@
       </svg>
     </div>
 
+
     <!-- 점검항목 영역 -->
     <section class="bg-white border-b py-8">
       <div class="container max-w-5xl mx-auto m-8">
         <h2
-          class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800"
+          class="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800"
         >
           점검항목
         </h2>
         <div class="w-full mb-4">
           <div
-            class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"
+            class="h-1 mx-auto mb-10 gradient w-64 opacity-25 my-0 py-0 rounded-t"
           ></div>
         </div>
         <div class="flex flex-wrap">
@@ -460,5 +460,15 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          var element = document.querySelector(".transition-all");
+          element.classList.remove("translate-y-20");
+          element.classList.remove("opacity-0");
+        }, 500);
+      });
+    </script>
   </body>
 </html>

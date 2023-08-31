@@ -27,19 +27,17 @@
 
   <body>
     <!-- 헤더 영역 -->
-    <header class="fixed w-full shadow-md z-10">
-      <nav class="bg-white border-gray-200 py-3.5">
+    <header class="fixed z-10 bg-white w-full h-20 shadow-lg border-gray-200 py-4">
+      <nav class="">
         <div
           class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
         >
           <div class="flex">
-            <img
-              src="/img/JBU_logo.png"
-              class="flex h-9 mx-2"
-              alt="중부대 로고"
-            />
-            <a href="/">
-              <img src="/img/Hook_logo.png" class="h-9" alt="Hook 로고" />
+            <a href="https://www.joongbu.ac.kr/is/" class="block my-auto">
+              <img src="/img/JBU_logo.png" class="h-12 mx-2" alt="중부대 로고" />
+            </a>
+            <a href="/" class="block my-auto">
+              <img src="/img/Hook_logo.png" class="h-10 mx-1" alt="Hook 로고" />
             </a>
           </div>
           <% if (is_logined) { %>
@@ -80,39 +78,41 @@
               <li>
                 <a
                   href="/"
-                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block px-4 text-xl font-medium text-gray-700 hover:text-green-700 hover:transition-all hover:duration-300"
                   >홈</a
                 >
               </li>
               <li>
                 <a
                   href="/analysis"
-                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block px-4 text-xl font-medium text-gray-700 hover:text-green-700 hover:transition-all hover:duration-300"
                   >진단서비스</a
                 >
               </li>
               <li>
                 <a
                   href="/list"
-                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block px-4 text-xl font-medium text-gray-700 hover:text-green-700 hover:transition-all hover:duration-300"
                   >점검항목</a
                 >
               </li>
               <li>
                 <a
                   href="/result"
-                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block px-4 text-xl font-medium text-gray-700 hover:text-green-700 hover:transition-all hover:duration-300"
                   >진단결과</a
                 >
               </li>
+              <% if (is_logined) { %>
               <li>
                 <a
                   href="/auth/mypage"
-                  class="block pl-3 pr-3 text-xl text-gray-900 hover:text-green-700 hover:transition-all hover:duration-300"
+                  class="block px-4 text-xl font-medium text-gray-700 hover:text-green-700 hover:transition-all hover:duration-300"
                   aria-current="page"
                   >나의정보</a
                 >
               </li>
+              <% } %>
             </ul>
           </div>
         </div>
