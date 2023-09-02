@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/img/Hook_favicon.ico" type="image/x-icon">
     <title>Hook</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -32,7 +33,7 @@
 
   <body class="bg-gray-100">
     <header class="fixed z-10 bg-white w-full h-20 shadow-lg border-gray-200 py-4">
-      <nav class="">
+      <nav>
         <div
           class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
         >
@@ -124,7 +125,7 @@
     </header>
 
     <!-- 진단결과 영역 -->
-    <section class="border-b py-12 w-full md:w-3/5 mx-auto">
+    <section class="border-b py-12 w-[768px] mx-auto">
       <div class="flex justify-end">
         <button
           id="convertButton"
@@ -135,7 +136,7 @@
       </div>
       <div
         id="result_pdf"
-        class="container max-w-5xl mx-auto my-2 rounded-lg shadow-lg bg-white py-5"
+        class="container mx-auto my-2 rounded-lg shadow-lg bg-white py-5"
       >
         <h2
           class="w-full my-2 text-3xl font-medium leading-tight text-center text-black"
@@ -149,8 +150,8 @@
           </p>
         </div>
         <div class="flex flex-col">
-          <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="overflow-x-auto mx-0.5">
+            <div class="py-2 inline-block min-w-full px-8">
               <div class="overflow-hidden">
                 <table class="min-w-full border-2 border-gray-200">
                   <thead class="bg-white border-b">
@@ -190,17 +191,17 @@
                         1
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.SI_Login.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (SI_Login2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= SI_Login2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (SI_Login1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= SI_Login1 %>
                       </td>
@@ -213,17 +214,17 @@
                         2
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.SI_Search.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (SI_Search2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= SI_Search2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (SI_Search1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= SI_Search1 %>
                       </td>
@@ -236,17 +237,17 @@
                         3
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.PHP_CI.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (PHP_CI2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= PHP_CI2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (PHP_CI1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= PHP_CI1 %>
                       </td>
@@ -259,17 +260,17 @@
                         4
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.AE.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (AE2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= AE2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (AE1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= AE1 %>
                       </td>
@@ -282,17 +283,17 @@
                         5
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.DL.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (DL2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= DL2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (DL1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= DL1 %>
                       </td>
@@ -305,17 +306,17 @@
                         6
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.XSS_Stored.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (XSS_Stored2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= XSS_Stored2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (XSS_Stored1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= XSS_Stored1 %>
                       </td>
@@ -328,17 +329,17 @@
                         7
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.SF.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (SF2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= SF2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (SF1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= SF1 %>
                       </td>
@@ -351,17 +352,17 @@
                         8
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.Cookie.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (Cookie2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= Cookie2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (Cookie1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= Cookie1 %>
                       </td>
@@ -374,17 +375,17 @@
                         9
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.Redirect.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (Redirect2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= Redirect2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (Redirect1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= Redirect1 %>
                       </td>
@@ -397,17 +398,17 @@
                         10
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.CSRF.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (CSRF2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= CSRF2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (CSRF1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= CSRF1 %>
                       </td>
@@ -420,17 +421,17 @@
                         11
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.BF.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (BF2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= BF2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (BF1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= BF1 %>
                       </td>
@@ -443,17 +444,17 @@
                         12
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.LDAP.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (LDAP2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= LDAP2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (LDAP1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= LDAP1 %>
                       </td>
@@ -466,17 +467,17 @@
                         13
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.XML_XPATH.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (XML_XPATH2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= XML_XPATH2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (XML_XPATH1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= XML_XPATH1 %>
                       </td>
@@ -489,17 +490,17 @@
                         14
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.BA.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (BA2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= BA2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (BA1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= BA1 %>
                       </td>
@@ -512,17 +513,17 @@
                         15
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.DOR.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (DOR2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= DOR2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (DOR1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= DOR1 %>
                       </td>
@@ -535,17 +536,17 @@
                         16
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.Base.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (Base2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= Base2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (Base1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= Base1 %>
                       </td>
@@ -558,17 +559,17 @@
                         17
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.RFA.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (RFA2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= RFA2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (RFA1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= RFA1 %>
                       </td>
@@ -581,17 +582,17 @@
                         18
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.XSS.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (XSS2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= XSS2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (XSS1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= XSS1 %>
                       </td>
@@ -604,17 +605,17 @@
                         19
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.SM.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (SM2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= SM2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (SM1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= SM1 %>
                       </td>
@@ -627,17 +628,17 @@
                         20
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="text-sm text-gray-900 font-medium capitalize px-6 py-2.5 whitespace-nomal"
                       >
                         <%= scripts.BS.name %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (BS2 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= BS2 %>
                       </td>
                       <td
-                        class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nomal"
+                        class="<%= (BS1 === 'risk') ? 'text-sm text-red-400 font-semibold capitalize px-6 py-2.5 whitespace-nomal' : 'text-sm text-gray-600 font-medium capitalize px-6 py-2.5 whitespace-nomal' %>"
                       >
                         <%= BS1 %>
                       </td>
@@ -665,8 +666,8 @@
           </p>
         </div>
         <div class="flex flex-col">
-          <div class="sm:mx-0.5 lg:mx-0.5">
-            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="mx-0.5">
+            <div class="py-2 inline-block min-w-full px-8">
               <div class="overflow-hidden">
                 <table class="min-w-full border-2 border-gray-200">
                   <thead class="bg-white border-b">
@@ -695,7 +696,7 @@
                         <%= scripts[key].name %>
                       </td>
                       <td
-                        class="bg-gray-100 text-sm text-gray-900 font-light px-6 py-4 whitespace-nomal break-words"
+                        class="bg-gray-100 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nomal break-words"
                       >
                         <%= scripts[key].measures %>
                       </td>
@@ -730,10 +731,10 @@
             >
             <ul class="list-none text-xs mb-6 cursor-default">
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
-                <p class="text-gray-500">진단도구</p>
+                <p class="text-gray-600">진단도구</p>
               </li>
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
-                <p class="text-gray-500">웹서비스</p>
+                <p class="text-gray-600">웹서비스</p>
               </li>
             </ul>
           </div>
@@ -743,7 +744,7 @@
             >
             <ul class="list-none text-xs mb-6 cursor-default">
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
-                <p class="text-gray-500">웹취약점</p>
+                <p class="text-gray-600">웹취약점</p>
               </li>
             </ul>
           </div>
@@ -753,10 +754,10 @@
             >
             <ul class="list-none text-xs mb-6 cursor-default">
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
-                <p class="text-gray-500">진단결과</p>
+                <p class="text-gray-600">진단결과</p>
               </li>
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
-                <p class="text-gray-500">대응방안</p>
+                <p class="text-gray-600">대응방안</p>
               </li>
             </ul>
           </div>
@@ -766,13 +767,13 @@
             >
             <ul class="list-none text-xs mb-6 cursor-default">
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
-                <p class="text-gray-500">about</p>
+                <p class="text-gray-600">about</p>
               </li>
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
-                <p class="text-gray-500">project</p>
+                <p class="text-gray-600">project</p>
               </li>
               <li class="pl-[2px] mt-2 inline-block mr-2 md:block md:ml-0">
-                <p class="text-gray-500">contact</p>
+                <p class="text-gray-600">contact</p>
               </li>
             </ul>
           </div>
