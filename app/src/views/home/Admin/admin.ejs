@@ -32,10 +32,10 @@
     </script>
 </head>
 <body>
-<div class="flex flex-col bg-neutral-400">
+<div class="flex flex-col bg-neutral-600">
 
     <!-- Barra de navegación superior -->
-    <header class="bg-neutral-900 text-white shadow-lg w-full py-3.5 px-4 flex items-center justify-between">
+    <header class="bg-zinc-800 border-gray-900 text-white shadow-lg w-full py-3.5 px-4 flex items-center justify-between">
         <div class="flex items-center">
             <div class="flex">
                 <a href="https://www.joongbu.ac.kr/is/" class="block my-auto">
@@ -60,7 +60,7 @@
     <!-- 콘텐츠 영역 -->
     <div class="flex-1 flex flex-wrap">
         <!-- 사이드 바 영역 -->
-        <div class="p-2 bg-neutral-800 w-full md:w-60 flex flex-col md:flex" id="sideNav">
+        <div class="p-2 bg-neutral-950 w-full md:w-60 flex flex-col md:flex" id="sideNav">
             <nav>
                 <a class="block text-neutral-50 text-[17px] font-semibold py-2.5 px-4 my-4 mr-1 rounded transition duration-200 hover:bg-neutral-500 hover:text-white" href="/admin">
                     <i class="fas fa-home w-9"></i>어드민 홈
@@ -69,7 +69,7 @@
                     <i class="fas fa-users w-9"></i>회원 정보
                 </a>
                 <a class="block text-neutral-50 text-[17px] font-semibold py-2.5 px-4 my-4 mr-1 rounded transition duration-200 hover:bg-neutral-500 hover:text-white" href="/admin/show/requestList">
-                    <i class="fas fa-exchange-alt w-9"></i>진단요청 목록
+                    <i class="fas fa-exchange-alt w-9"></i>진단 요청 목록
                 </a>
             </nav>
         </div>
@@ -77,46 +77,36 @@
         <!-- 콘텐츠 영역 -->
         <div class="flex-1 p-4 w-3/4 md:w-1/2">
 
-            <!-- 원형 그래프 -->
-            <div class="w-1/2 mt-8 flex flex-wrap space-x-0 space-y-2 md:space-x-4 md:space-y-0">
+            <!-- 막대 그래프 -->
+            <div class="w-full mt-8 flex flex-wrap space-x-0 space-y-2 md:space-x-4 md:space-y-0">
                 <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
-                    <h2 class="text-gray-500 text-lg font-semibold pb-1">취약점진단 진행 상태</h2>
+                    <h2 class="text-gray-700 text-lg font-bold pb-1">취약점진단 진행상태</h2>
                     <div class="my-1"></div>
-                    <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
+                    <div class="bg-gray-300 h-[1px] mb-6"></div>
                     <div class="chart-container" style="position: relative; height:150px; width:300px; margin: 0 auto;">
                         <canvas id="barChart"></canvas>
                     </div>
                 </div>
-                <!-- <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
-                    <h2 class="text-gray-500 text-lg font-semibold pb-1">취약점진단 진행 상태</h2>
+                <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
+                    <h2 class="text-gray-700 text-lg font-bold pb-1">월별 진단요청 건수</h2>
                     <div class="my-1"></div>
-                    <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-                    <div class="chart-container" style="position: relative; height:150px; width:300px; margin: 0 auto;">
-                        <canvas id="barChart"></canvas>
+                    <div class="bg-gray-300 h-[1px] mb-6"></div>
+                    <div class="chart-container" style="position: relative; width:320px; color: rgb(#ffdf42, green, blue); margin: 0 auto;">
+                        <canvas id="lineChart"></canvas>
                     </div>
-                </div> -->
-
-                <!-- <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
-                    <h2 class="text-gray-500 text-lg font-semibold pb-1">월별 진단요청 건수</h2>
-                    <div class="my-1"></div>
-                    <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-                    <div class="chart-container" style="position: relative; height:150px; width:140px; color: rgb(#ffdf42, green, blue); margin: 0 auto;">
-                        <canvas id="doughnutChart"></canvas>
-                    </div>
-                </div> -->
-
+                </div>
             </div>
 
             <!-- 회원정보 영역 -->
             <div class="mt-8 bg-white p-4 shadow rounded-lg">
                 <div class="bg-white p-4 rounded-md mt-4">
-                    <h2 class="text-gray-500 text-lg font-semibold pb-4">회원 정보</h2>
-                    <div class="my-1 h-2"></div> <!-- Espacio de separación -->
-                    <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div> <!-- Línea con gradiente -->
+                    <h2 class="text-gray-700 text-lg font-bold pb-4"><i class="fas fa-users w-9"></i>회원 정보</h2>
+                    <div class="my-1"></div> <!-- Espacio de separación -->
+                    <div class="bg-[#AD6E6E] h-[1px] mb-6"></div> <!-- Línea con gradiente -->
                     <table id="" class="display" style="width:100%">
                         <thead>
                             <tr class="text-sm leading-normal">
-                                <th class="w-10 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원번호</th>
+                                <th class="w-20 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">회원번호</th>
                                 <th class="w-24 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">아이디</th>
                                 <th class="w-24 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이름</th>
                                 <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">이메일</th>
@@ -153,17 +143,17 @@
             <!-- 진단요청 영역 -->
             <div class="mt-8 bg-white p-4 shadow rounded-lg">
                 <div class="bg-white p-4 rounded-md mt-4">
-                    <h2 class="text-gray-500 text-lg font-semibold pb-4">진단 요청</h2>
+                    <h2 class="text-gray-700 text-lg font-bold pb-4"><i class="fas fa-exchange-alt w-9"></i>진단 요청 목록</h2>
                     <div class="my-1"></div> <!-- Espacio de separación -->
-                    <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div> <!-- Línea con gradiente -->
+                    <div class="bg-[#AD6E6E] h-[1px] mb-6"></div>
                     <table id="" class="display" style="width:100%">
                         <thead>
                             <tr class="text-sm leading-normal">
-                                <th class="w-10 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">요청번호</th>
+                                <th class="w-20 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">요청번호</th>
                                 <th class="w-24 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">아이디</th>
-                                <th class="w-80 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">URL</th>
+                                <th class="w-64 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">URL</th>
                                 <th class="py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">요청시각</th>
-                                <th class="w-10 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">진행상태</th>
+                                <th class="w-20 py-2 px-4 text-left bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light">진행상태</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -221,42 +211,72 @@
             labels: ['진행 중', '진행 완료'], // 레이블 비움
             datasets: [
                 {
-                    label: '진단 진행 중', // 레이블 설정
                     data: [0,0], // 초기값 설정
-                    backgroundColor: ['#00F0FF', '#8B8B8D'],
+                    backgroundColor: ['#FFDC46', '#8B8B8D'],
                 },
             ]
         },
         options: {
+            plugins: {
+                legend : {
+                    display: false,
+                },
+                title: {
+                display: true,
+                text: "취약점진단 진행상태"
+                },
+            }
         },
     });
+    fetchDataAndUpdateChart(barChartProcess, '/admin/chart/process1');
 
+    async function fetchDataAndUpdateChart1(chart, apiEndpoint) {
+            try {
+                const response = await fetch(apiEndpoint);
+                const data = await response.json();
 
+                chart.data.labels = data.labels;
+                chart.data.datasets[0].data = data.datasets[0].data;
+                chart.update(); // 차트 업데이트
+            } catch (error) {
+                console.error('데이터 가져오기 오류:', error);
+            }
+        }
 
-    fetchDataAndUpdateChart(barChartProcess, '/admin/chart/process1'); // 백엔드 엔드포인트 설정 필요
+        const lineChart = new Chart(document.getElementById('lineChart'), {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: '월별 진단요청',
+                    data: [],
+                    borderColor: '#48DAD2',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                        y: {
+                            beginAtZero: true,
+                            stepSize: 1, // y 축 간격을 1로 설정
+                        }
+                },
+                spanGaps: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: true,
+                        text: "2023 월별 진단요청 건수"
+                    },
+                }
+            },
+        });
 
-    // var doughnutChartProcess = new Chart(document.getElementById('doughnutChart'), {
-    //     type: 'doughnut',
-    //     data: {
-    //         labels: ['진행 중', '진행 완료'],
-    //         datasets: [{
-    //             data: [0, 0], // 초기값 설정
-    //             backgroundColor: ['#ffdf42', '#8B8B8D'],
-    //         }]
-    //     },
-    //     options: {
-    //         // ... (나머지 옵션은 그대로 유지)
-    //     }
-    // });
+        fetchDataAndUpdateChart1(lineChart, '/admin/chart/process2');
 
-    // fetchDataAndUpdateChart(doughnutChartProcess, '/admin/chart/process2'); // 백엔드 엔드포인트 설정 필요
-
-    // const menuBtn = document.getElementById('menuBtn');
-    // const sideNav = document.getElementById('sideNav');
-
-    // menuBtn.addEventListener('click', () => {
-    //     sideNav.classList.toggle('hidden');
-    // });
 </script>
 
 </body>

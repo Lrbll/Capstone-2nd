@@ -333,31 +333,41 @@ const process = {
   },
 
   chartProcess2: (req, res) => {
-    function calculatePercentage(value1, value2) {
-      const total = value1 + value2;
-      const percentage1 = (value1 / total) * 100;
-      const percentage2 = (value2 / total) * 100;
-      return [percentage1, percentage2];
-    }
-    const query = "SELECT process, COUNT(*) as count FROM results_info GROUP BY process";
-    
-    db.mysql.query(query, (err, results) => {
+    try {
+      const query = `
+        SELECT YEAR(date) AS year, MONTH(date) AS month, COUNT(*) AS count
+        FROM results_info
+        GROUP BY YEAR(date), MONTH(date)
+      `;
+  
+      db.mysql.query(query, (err, results) => {
         if (err) {
-            console.error('Error querying database:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-        } else {
-            const values = { work: 0, done: 0 };
-            results.forEach(row => {
-                if (row.process === "work") {
-                  values.work = row.count;
-                } else if (row.process === "done") {
-                  values.done = row.count;
-                }
-            });
-            const percentages = calculatePercentage(values.work, values.done); // 수정된 부분
-            res.json(percentages);
+          console.error('데이터 추출 오류:', err);
+          res.status(500).json({ error: '데이터 추출 오류' });
+          return;
         }
-    });
+  
+        const chartData = {
+          labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+          datasets: [{
+            label: '월별 데이터 수',
+            data: [0,0,0,0,0,0,0,0,0,0,0,0],
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 2,
+            fill: false
+          }]
+        };
+        results.forEach((row) => {
+          const monthIndex = row.month - 1;
+          chartData.datasets[0].data[monthIndex] = row.count;
+        });
+  
+        res.json(chartData);
+      });
+    } catch (error) {
+      console.error('데이터 가져오기 오류:', error);
+      res.status(500).json({ error: '데이터 가져오기 오류' });
+    }
   },
 };
 
