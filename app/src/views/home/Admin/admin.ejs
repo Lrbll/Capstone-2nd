@@ -102,7 +102,7 @@
                 <div class="bg-white p-4 rounded-md mt-4">
                     <h2 class="text-gray-700 text-lg font-bold pb-4"><i class="fas fa-users w-9"></i>회원 정보</h2>
                     <div class="my-1"></div> <!-- Espacio de separación -->
-                    <div class="bg-[#AD6E6E] h-[1px] mb-6"></div> <!-- Línea con gradiente -->
+                    <div class="bg-gray-300 h-[1px] mb-6"></div> <!-- Línea con gradiente -->
                     <table id="" class="display" style="width:100%">
                         <thead>
                             <tr class="text-sm leading-normal">
@@ -117,7 +117,7 @@
                             <% users.forEach(user => { %>
                             <tr class="hover:bg-grey-lighter">
                                 <td class="py-2 px-4 border-b border-grey-light"><%= user.num %></td>
-                                <td class="py-2 px-4 border-b border-grey-light">
+                                <td class="py-2 px-4 border-b border-grey-light text-">
                                     <a href="/admin/show/userInfo/<%= user.id %>"><%= user.id %></a>
                                 </td>
                                 <td class="py-2 px-4 border-b border-grey-light"><%= user.user_name %></td>
@@ -145,7 +145,7 @@
                 <div class="bg-white p-4 rounded-md mt-4">
                     <h2 class="text-gray-700 text-lg font-bold pb-4"><i class="fas fa-exchange-alt w-9"></i>진단 요청 목록</h2>
                     <div class="my-1"></div> <!-- Espacio de separación -->
-                    <div class="bg-[#AD6E6E] h-[1px] mb-6"></div>
+                    <div class="bg-gray-300 h-[1px] mb-6"></div>
                     <table id="" class="display" style="width:100%">
                         <thead>
                             <tr class="text-sm leading-normal">
