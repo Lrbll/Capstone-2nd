@@ -4,14 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/img/Hook_favicon.ico" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="/img/Hook_favicon.ico"
+      type="image/x-icon"
+    />
     <title>Hook</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap");
+
       body {
         font-family: "Noto Sans KR", sans-serif;
       }
+
       .gradient {
         background: linear-gradient(90deg, #0b952b9e 0%, #d8da51 100%);
       }
@@ -19,61 +25,60 @@
   </head>
 
   <body>
-    <!-- 헤더 영역 -->
-    <header class="fixed z-10 bg-white w-full h-20 shadow-lg border-gray-200 py-4">
-      <nav class="">
-        <div
-          class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
-        >
-          <div class="flex">
-            <a href="https://www.joongbu.ac.kr/is/" class="block my-auto">
-              <img src="/img/JBU_logo.png" class="h-12 mx-2" alt="중부대 로고" />
-            </a>
-            <a href="/" class="block my-auto">
-              <img src="/img/Hook_logo.png" class="h-10 mx-1" alt="Hook 로고" />
-            </a>
-          </div>
-          <div
-            class="mr-9 items-center justify-around hidden w-full lg:flex lg:w-auto"
-          >
-            <ul
-              class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 ml-20 lg:mt-0"
-            >
-              <li>
-                <button
-                  onclick="scrollToSection('about_section')"
-                  class="px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
-                >
-                  About
-                </button>
-              </li>
-              <li>
-                <button
-                  onclick="scrollToSection('project_section')"
-                  class="px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
-                >
-                  Project
-                </button>
-              </li>
-              <li>
-                <button
-                  onclick="scrollToSection('contact_section')"
-                  class="px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
-                >
-                  Contact
-                </button>
-              </li>
-            </ul>
-          </div>
+    <header
+      class="fixed z-10 bg-white w-full h-24 shadow-lg border-gray-200 py-6"
+    >
+      <div
+        class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
+      >
+        <div class="flex">
+          <a href="https://www.joongbu.ac.kr/is/" class="block my-auto">
+            <img src="/img/JBU_logo.png" class="h-12 mx-2" alt="중부대 로고" />
+          </a>
+          <a href="/" class="block my-auto">
+            <img src="/img/Hook_logo.png" class="h-10 mx-1" alt="Hook 로고" />
+          </a>
         </div>
-      </nav>
+        <div
+          class="mr-9 items-center justify-around hidden w-full lg:flex lg:w-auto"
+        >
+          <ul
+            class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 ml-20 lg:mt-0"
+          >
+            <li>
+              <button
+                onclick="scrollToSection('about_section')"
+                class="px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
+              >
+                About
+              </button>
+            </li>
+            <li>
+              <button
+                onclick="scrollToSection('project_section')"
+                class="px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
+              >
+                Project
+              </button>
+            </li>
+            <li>
+              <button
+                onclick="scrollToSection('contact_section')"
+                class="px-4 text-sm text-black hover:text-gray-700 hover:transition-all hover:duration-300"
+              >
+                Contact
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </header>
 
     <!-- about 영역 -->
     <section id="about_section" class="bg-gray-100 border-b py-8 min-h-screen">
       <div class="container max-w-5xl mx-auto m-8 w-3/4">
         <div
-          class="mx-auto w-52 gradient text-center text-black font-bold rounded-full mt-24 mb-2 py-4 px-8 shadow-lg"
+          class="mx-auto w-52 gradient text-center text-black text-lg font-bold rounded-full mt-24 mb-2 py-4 px-8 shadow-lg"
         >
           About
         </div>
@@ -254,7 +259,9 @@
                     <div class="w-20">
                       <p class="font-semibold">진단도구</p>
                     </div>
-                    <div><p>Python (Selenuim)</p></div>
+                    <div>
+                      <p>Python (Selenuim)</p>
+                    </div>
                   </div>
                   <div class="flex flex-row py-1.5">
                     <div class="w-20">
@@ -267,7 +274,9 @@
                     </div>
                   </div>
                 </div>
-                <div class="flex"><p></p></div>
+                <div class="flex">
+                  <p></p>
+                </div>
               </div>
             </div>
           </div>
@@ -275,7 +284,7 @@
       </div>
     </section>
 
-    <!-- contact section -->
+    <!-- contact 영역 -->
     <section
       class="bg-gray-50 section border-b py-8 min-h-screen"
       id="contact_section"
@@ -286,39 +295,88 @@
         >
           Contact Us
         </div>
-        <div class="mt-10 flex flex-col flex-wrap justify-around items-center lg:flex-row">
+        <div
+          class="mt-10 flex flex-col flex-wrap justify-around items-center lg:flex-row"
+        >
           <div class="flex flex-col w-36 my-10">
-            <img src="./img/youjin.png" class="w-10 rounded-full border-2 border-gray-500">
+            <img
+              src="./img/youjin.png"
+              class="w-10 rounded-full border-2 border-gray-500"
+            />
             <p class="mt-6 font-semibold">instagram</p>
-            <p class="text-sm"><a href="https://www.instagram.com/eukkgeon"><img src="./img/instagram_icon.png" class="inline w-5" alt="">  @eukkgeon</a></p>
+            <p class="text-sm">
+              <a href="https://www.instagram.com/eukkgeon"
+                ><img
+                  src="./img/instagram_icon.png"
+                  class="inline w-5"
+                  alt=""
+                />
+                @eukkgeon</a
+              >
+            </p>
             <p class="mt-6 font-semibold">email</p>
             <p class="text-sm">xsnorlaxx@naver.com</p>
           </div>
           <div class="flex flex-col w-36 my-10">
-            <img src="./img/jiwon.png" class="w-10 rounded-full border-2 border-gray-500">
+            <img
+              src="./img/jiwon.png"
+              class="w-10 rounded-full border-2 border-gray-500"
+            />
             <p class="mt-6 font-semibold">instagram</p>
-            <p class="text-sm"><a href="https://www.instagram.com/sweetpea_wony"><img src="./img/instagram_icon.png" class="inline w-5" alt="">  @sweetpea_wony</a></p>
+            <p class="text-sm">
+              <a href="https://www.instagram.com/sweetpea_wony"
+                ><img
+                  src="./img/instagram_icon.png"
+                  class="inline w-5"
+                  alt=""
+                />
+                @sweetpea_wony</a
+              >
+            </p>
             <p class="mt-6 font-semibold">email</p>
             <p class="text-sm">lhwjbu@naver.com</p>
           </div>
           <div class="flex flex-col w-36 my-10">
-            <img src="./img/harin.png" class="w-10 rounded-full border-2 border-gray-500">
+            <img
+              src="./img/harin.png"
+              class="w-10 rounded-full border-2 border-gray-500"
+            />
             <p class="mt-6 font-semibold">instagram</p>
-            <p class="text-sm"><a href="https://www.instagram.com/sour_harin"><img src="./img/instagram_icon.png" class="inline w-5" alt="">  @sour_harin</a></p>
+            <p class="text-sm">
+              <a href="https://www.instagram.com/sour_harin"
+                ><img
+                  src="./img/instagram_icon.png"
+                  class="inline w-5"
+                  alt=""
+                />
+                @sour_harin</a
+              >
+            </p>
             <p class="mt-6 font-semibold">email</p>
             <p class="text-sm">loyal1127@naver.com</p>
           </div>
           <div class="flex flex-col w-36 my-10">
-            <img src="./img/dayeon.png" class="w-10 rounded-full border-2 border-gray-500">
+            <img
+              src="./img/dayeon.png"
+              class="w-10 rounded-full border-2 border-gray-500"
+            />
             <p class="mt-6 font-semibold">instagram</p>
-            <p class="text-sm"><a href="https://www.instagram.com/lxxlrbll"><img src="./img/instagram_icon.png" class="inline w-5" alt="">  @lxxlrbll</a></p>
+            <p class="text-sm">
+              <a href="https://www.instagram.com/lxxlrbll"
+                ><img
+                  src="./img/instagram_icon.png"
+                  class="inline w-5"
+                  alt=""
+                />
+                @lxxlrbll</a
+              >
+            </p>
             <p class="mt-6 font-semibold">email</p>
             <p class="text-sm">dlxkdxs@naver.com</p>
           </div>
         </div>
       </div>
     </section>
-    <!--Footer-->
     <footer class="bg-white">
       <div class="container mx-auto px-8">
         <div class="w-full flex flex-col md:flex-row py-6">
@@ -387,6 +445,7 @@
         </div>
       </div>
     </footer>
+
     <script>
       function scrollToSection(sectionId) {
         var section = document.getElementById(sectionId);

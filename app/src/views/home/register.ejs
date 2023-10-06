@@ -4,26 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/img/Hook_favicon.ico" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="/img/Hook_favicon.ico"
+      type="image/x-icon"
+    />
     <title>Hook</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap");
+
       body {
         font-family: "Noto Sans KR", sans-serif;
       }
     </style>
   </head>
+
   <body>
-    <!-- 헤더 영역 -->
-    <header class="fixed z-10 bg-white w-full h-20 shadow-lg border-gray-200 py-4">
+    <header
+      class="fixed z-10 bg-white w-full h-24 shadow-lg border-gray-200 py-6"
+    >
       <nav class="">
         <div
           class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
         >
           <div class="flex">
             <a href="https://www.joongbu.ac.kr/is/" class="block my-auto">
-              <img src="/img/JBU_logo.png" class="h-12 mx-2" alt="중부대 로고" />
+              <img
+                src="/img/JBU_logo.png"
+                class="h-12 mx-2"
+                alt="중부대 로고"
+              />
             </a>
             <a href="/" class="block my-auto">
               <img src="/img/Hook_logo.png" class="h-10 mx-1" alt="Hook 로고" />
@@ -32,8 +43,6 @@
         </div>
       </nav>
     </header>
-
-    <!-- 섹션 영역 -->
     <section class="bg-gray-50 min-h-screen flex flex-col justify-center">
       <div
         class="min-h-screen w-3/4 flex flex-col items-center px-6 py-8 mx-auto mt-28"
@@ -45,7 +54,6 @@
             >
               회원가입
             </h1>
-            <!-- register 라우터로 post요청 보냄 -->
             <form
               class="space-y-4 md:space-y-6"
               action="/auth/register"

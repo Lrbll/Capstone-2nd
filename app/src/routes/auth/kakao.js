@@ -60,7 +60,6 @@ router.get("/callback", async (req, res) => {
   req.session.nickname = user.data.id;
 
   const kakao_id = user.data.id;
-  console.log("카카오 아이디는", kakao_id);
   const selectQuery = `SELECT * FROM users WHERE id = ${kakao_id}`;
   db.mysql.query(selectQuery, (selectErr, selectResult) => {
     if (selectErr) {

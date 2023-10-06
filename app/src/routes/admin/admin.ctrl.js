@@ -105,7 +105,6 @@ const output = {
     const is_logined = req.session.is_logined;
     const is_who = req.session.is_who;
     const user = req.params.user;
-    console.log(user);
 
     if (is_who == "admin") {
       // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
@@ -159,7 +158,6 @@ const output = {
     const is_who = req.session.is_who;
     const user = req.params.user;
     const resultNumber = req.params.resultNumber;
-    console.log(user);
 
     if (is_who == "admin") {
       // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
@@ -222,7 +220,6 @@ const output = {
           }
 
           const scripts = JSON.parse(data);
-          console.log(url);
           res.render("home/Admin/resultInfo", {
             is_logined: is_logined,
             is_who: is_who,

@@ -25,7 +25,7 @@ from datetime import datetime
 from selenium.webdriver.common.keys import Keys
 
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver = webdriver.Chrome(service=Service(ChromeDriverManager(driver_version="114.0.5735.90").install()))
 # Service 객체에 webdriver-manager의 ChromeDriverManager를 사용하여 크롬 드라이버를 다운받은 경로가 아닌 현재 OS에 설치된 크롬 브라우저를 사용하도록 수정
 # 매번 chromedriver을 새로 받는 작업을 할 필요X
 
@@ -385,9 +385,9 @@ def Redirect(url):
     for option in options:
         value = option.get_attribute("value")  # get_attribute : 특정 요소의 값 반환
         # 속성값을 value에 저장  #주소들이 저장됨
-        if value != "http://192.168.182.129/bWAPP/user_extra.php":
+        if value != "http://isweb.joongbu.ac.kr/~jbuis/":
             driver.execute_script(
-                "arguments[0].value = 'http://192.168.182.129/bWAPP/user_extra.php'",
+                "arguments[0].value = 'http://isweb.joongbu.ac.kr/~jbuis/'",
                 option,
             )
 
@@ -398,7 +398,7 @@ def Redirect(url):
     current_url = driver.current_url
 
     if (
-        current_url == "http://192.168.182.129/bWAPP/user_extra.php"
+        current_url == "http://isweb.joongbu.ac.kr/~jbuis/"
     ):  # 현재 페이지가 중부대학교 졸업작품 페이지면 취약
         print("Redirect 취약")
         redirect_json = "risk"
@@ -411,6 +411,21 @@ def CSRF(url):  # CSRF
     print("\n[CSRF]")
     global csrf_json
 
+    conn = pymysql.connect(
+        host="localhost", user="root", password="81092830", database="dev"
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        f"select tool_num from tool_num"
+    )
+
+    row = cursor.fetchone()
+    for i in row:
+        num = i
+        print(num)
+
     logout = url + "/logout.php"
     driver.get(logout)
     time.sleep(1)  # 로그아웃하기
@@ -418,9 +433,9 @@ def CSRF(url):  # CSRF
     create = url + "/user_new.php"  # 사용자 생성 #student14
     driver.get(create)
     id = driver.find_element(By.ID, "login")
-    id.send_keys("student1000")  # 변경!!
+    id.send_keys(f"student{num}")  # 변경!!
     email = driver.find_element(By.ID, "email")
-    email.send_keys("student1000@new.com")  # 변경!!
+    email.send_keys(f"student{num}@new.com")  # 변경!!
     passwd = driver.find_element(By.ID, "password")
     passwd.send_keys("test")
     passwd_conf = driver.find_element(By.ID, "password_conf")
@@ -432,7 +447,7 @@ def CSRF(url):  # CSRF
 
     driver.get(url + "/login")  # 만든 계정으로 로그인 #student14 로그인
     log_in = driver.find_element(By.ID, "login")
-    log_in.send_keys("student1000")  # 변경!!
+    log_in.send_keys(f"student{num}")  # 변경!!
     passwd = driver.find_element(By.ID, "password")
     passwd.send_keys("test")
     driver.find_element(By.TAG_NAME, "button").send_keys(Keys.ENTER)
@@ -467,7 +482,7 @@ def CSRF(url):  # CSRF
         check = url + "/sqli_16.php"  # 비밀번호 변경 확인
         driver.get(check)
         input_box = driver.find_element(By.ID, "login")
-        input_box.send_keys("student1000")  # 변경!!!
+        input_box.send_keys(f"student{num}")  # 변경!!!
         input_box2 = driver.find_element(By.ID, "password")
         input_box2.send_keys("testing")
         driver.find_element(By.TAG_NAME, "button").send_keys(Keys.ENTER)
@@ -485,6 +500,23 @@ def CSRF(url):  # CSRF
     else:
         csrf_json = "safe"
         print("CSRF 안전")
+
+    num += 1
+
+    cursor.execute(
+        f"UPDATE `dev`.`tool_num` SET `tool_num` = {num};")
+
+    cursor.execute("select * from tool_num;")
+    conn.commit()
+
+    row2 = cursor.fetchall()
+
+    for i in row2:
+        res = i
+        print(res)
+
+    conn.close()
+
 
     login(url)  # 다시 로그인
 
@@ -602,15 +634,31 @@ def DOR(url):
     print("\n[Insecure DOR(Change Secret)]")
     global DOR_json
 
+    conn = pymysql.connect(
+        host="127.0.0.1", user="root", password="zoqtmxhs159632!!", database="dev"
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        f"select tool_num from tool_num"
+    )
+
+    row = cursor.fetchone()
+    for i in row:
+        num = i
+        print(num)
+
+
     count = 0
 
     create = url + "/user_new.php"  # user 생성
 
     driver.get(create)
     id = driver.find_element(By.ID, "login")
-    id.send_keys("user1000")  # 변경!
+    id.send_keys(f"user{num}")  # 변경!
     email = driver.find_element(By.ID, "email")
-    email.send_keys("user1000@a.com")  # 변경!
+    email.send_keys(f"user{num}@a.com")  # 변경!
     passwd = driver.find_element(By.ID, "password")
     passwd.send_keys("bbb")
     passwd_conf = driver.find_element(By.ID, "password_conf")
@@ -631,7 +679,7 @@ def DOR(url):
                 input_element.get_attribute("outerHTML")
             )  # get_attribute : 특정 요소의 값 반환
             driver.execute_script(
-                "arguments[0].value = 'user1000'", input_element
+                f"arguments[0].value = 'user{num}'", input_element
             )  # 변경!
             print(
                 input_element.get_attribute("outerHTML")
@@ -646,7 +694,7 @@ def DOR(url):
             driver.get(check)
 
             input_box = driver.find_element(By.ID, "login")  # 로그인
-            input_box.send_keys("user1000")  # 변경!
+            input_box.send_keys(f"user{num}")  # 변경!
             input_box2 = driver.find_element(By.ID, "password")
             input_box2.send_keys("bbb")
             driver.find_element(By.TAG_NAME, "button").send_keys(Keys.ENTER)
@@ -663,6 +711,22 @@ def DOR(url):
     else:
         print("안전")
         DOR_json = "safe"
+
+    num += 1
+
+    cursor.execute(
+        f"UPDATE `dev`.`tool_num` SET `tool_num` = {num};")
+
+    cursor.execute("select * from tool_num;")
+    conn.commit()
+
+    row2 = cursor.fetchall()
+
+    for i in row2:
+        res = i
+        print(res)
+
+    conn.close()
 
 
 # Base64 Encoding(Secret)
@@ -936,7 +1000,7 @@ def json_web(user_id, url):
     json_string = f"'{json_string}'"
 
     conn = pymysql.connect(
-        host="127.0.0.1", user="root", password="81092830", database="dev"
+        host="127.0.0.1", user="root", password="zoqtmxhs159632!!", database="dev"
     )
 
     cursor = conn.cursor()
@@ -965,7 +1029,7 @@ def json_web(user_id, url):
 
 
 def capstone(url):
-    login(url)  # 비박스 로그인
+    login(url)
     SI_Login(url)  # SQL 인젝션(로그인)
     SI_Search(url)  # SQL 인젝션(검색)
     PHP_CI(url)  # PHP CODE 인젝션
@@ -986,7 +1050,6 @@ def capstone(url):
     LDAP(url)  # LDAP Injection
     BS(url)  # Blind SQL
     XSS(url)  # XSS
-
 
 if __name__ == "__main__":
     user_id = sys.argv[1]

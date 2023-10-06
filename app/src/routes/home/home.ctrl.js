@@ -149,9 +149,6 @@ const process = {
     const query1 = `INSERT INTO results_info (id, url, date, results, process) VALUES ('${id}', '${url}', '${date}', '{}', '${status1}')`;
     const query2 = `SELECT id, num FROM results_info WHERE id = ? ORDER BY num DESC LIMIT 1`;
     const query3 = `UPDATE results_info SET process = ? WHERE id = ?`;
-    console.log(id);
-    console.log(url);
-    console.log(date);
     db.mysql.query(query1, (error) => {
       if (error) {
         console.error("Failed to insert data:", error);
@@ -161,7 +158,7 @@ const process = {
         return;
       }
 
-      const pythonProcess = spawn("C:\\capstone\\app\\venv\\Scripts\\python", [
+      const pythonProcess = spawn("venv\\Scripts\\python", [
         "main.py",
         req.session.nickname,
         url,

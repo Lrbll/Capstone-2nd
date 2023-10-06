@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/img/Hook_favicon.ico" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="/img/Hook_favicon.ico"
+      type="image/x-icon"
+    />
     <title>Hook</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -32,29 +36,38 @@
   </head>
 
   <body class="bg-gray-100">
-    <!-- 헤더 영역 -->
-    <header class="bg-zinc-800 border-gray-900 text-white shadow-lg w-full py-3.5 px-4 flex items-center justify-between">
+    <header
+      class="bg-zinc-800 border-gray-900 text-white shadow-lg w-full py-3.5 px-4 flex items-center justify-between"
+    >
       <div class="flex items-center">
-          <div class="flex">
-              <a href="https://www.joongbu.ac.kr/is/" class="block my-auto">
-                  <img src="/img/JBU_logo.png" class="h-12 mx-2" alt="중부대 로고" />
-              </a>
-              <a href="/" class="block my-auto">
-                  <img src="/img/Hook_logo.png" class="h-10 mx-1 invert" alt="Hook 로고" />
-              </a>
-              <h2 class="font-bold text-2xl ml-6 my-auto"><a href="/admin">Admin Page</a></h2>
-          </div>
-          <div class="md:hidden flex items-center"> <!-- Se muestra solo en dispositivos pequeños -->
-                  <i class="fas fa-bars text-gray-500 text-lg"></i> <!-- Ícono de menú -->
-          </div>
+        <div class="flex">
+          <a href="https://www.joongbu.ac.kr/is/" class="block my-auto">
+            <img src="/img/JBU_logo.png" class="h-12 mx-2" alt="중부대 로고" />
+          </a>
+          <a href="/" class="block my-auto">
+            <img
+              src="/img/Hook_logo.png"
+              class="h-10 mx-1 invert"
+              alt="Hook 로고"
+            />
+          </a>
+          <h2 class="font-bold text-2xl ml-6 my-auto">
+            <a href="/admin">Admin Page</a>
+          </h2>
+        </div>
+        <div class="md:hidden flex items-center">
+          <i class="fas fa-bars text-gray-500 text-lg"></i>
+        </div>
       </div>
       <form action="/auth/logout" method="post">
-          <button type="submit" class="block text-gray-500 py-2.5 px-4 my-2 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white mt-auto">
-              <i class="fas fa-sign-out-alt mr-2"></i>sign out
-          </button>
+        <button
+          type="submit"
+          class="block text-gray-500 py-2.5 px-4 my-2 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white mt-auto"
+        >
+          <i class="fas fa-sign-out-alt mr-2"></i>sign out
+        </button>
       </form>
     </header>
-    <!-- 진단결과 영역 -->
     <section class="border-b py-12 w-[768px] mx-auto">
       <div class="flex justify-end">
         <button
@@ -537,11 +550,8 @@
     </section>
 
     <script>
-      // HTML to PDF 변환 함수
       function convertHtmlToPdf() {
         const element = document.getElementById("result_pdf");
-
-        // html2pdf.js를 사용하여 HTML을 PDF로 변환
         html2pdf()
           .set({
             scale: 0.5,
@@ -550,7 +560,6 @@
           .save("웹취약점 진단결과.pdf");
       }
 
-      // 변환 버튼 클릭 시 변환 함수 호출
       document.addEventListener("DOMContentLoaded", function () {
         const convertButton = document.getElementById("convertButton");
         convertButton.addEventListener("click", convertHtmlToPdf);
