@@ -9,18 +9,15 @@ const output = {
     const is_who = req.session.is_who;
     
     if (is_who == "admin") {
-      // 사용자 목록 조회 쿼리
       const query1 = 'SELECT * FROM users';
       const query2 = 'SELECT * FROM results_info';
 
-      // 쿼리1 실행
       db.mysql.query(query1, (error1, results1) => {
         if (error1) {
           console.error('쿼리 실행 실패:', error1);
           return;
         }
 
-        // 쿼리2 실행
         db.mysql.query(query2, (error2, results2) => {
           if (error2) {
             console.error('쿼리 실행 실패:', error2);
@@ -55,10 +52,8 @@ const output = {
     const is_who = req.session.is_who;
     
     if (is_who == "admin") {
-      // 사용자 목록 조회 쿼리
       const query1 = 'SELECT * FROM users';
 
-      // 쿼리1 실행
       db.mysql.query(query1, (error1, results1) => {
         if (error1) {
           console.error('쿼리 실행 실패:', error1);
@@ -80,11 +75,10 @@ const output = {
     const is_who = req.session.is_who;
     
     if (is_who == "admin") {
-      // 사용자 목록 조회 쿼리
-      const query2 = 'SELECT * FROM results_info';
+      const query1 = 'SELECT * FROM results_info';
 
       // 쿼리2 실행
-      db.mysql.query(query2, (error2, results2) => {
+      db.mysql.query(query1, (error2, results2) => {
         if (error2) {
           console.error('쿼리 실행 실패:', error2);
           return;
@@ -107,7 +101,6 @@ const output = {
     const user = req.params.user;
 
     if (is_who == "admin") {
-      // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
       const query1 = `SELECT DISTINCT url FROM results_info WHERE id = '${user}'`;
       const query2 = `SELECT * FROM users WHERE id = '${user}'`;
       const query3 = `SELECT * FROM results_info WHERE id = '${user}'`;
@@ -136,7 +129,7 @@ const output = {
                     .json({ error: "서버 오류가 발생했습니다.", detail: error });
                   return;
                 }
-                // 결과에서 고유한 url 값들을 추출합니다.
+                // 결과에서 고유한 url 값들을 추출
                 const urls = results1.map((row) => row.url);
                 const userInfo = results2[0];
                 const resultsInfo = results3;
@@ -160,7 +153,6 @@ const output = {
     const resultNumber = req.params.resultNumber;
 
     if (is_who == "admin") {
-      // 데이터베이스 쿼리를 실행하여 해당 세션의 nickname과 일치하는 행을 조회합니다.
       const query = `SELECT url, results, DATE_FORMAT(date, "%Y-%m-%d %H:%i:%s") AS formattedDate
       FROM results_info 
       WHERE num = '${resultNumber}'`;
@@ -173,7 +165,6 @@ const output = {
         }
 
         if (results.length === 0) {
-          // 해당하는 결과가 없는 경우 처리
           res.status(404).send("Results not found");
           return;
         }
@@ -262,9 +253,8 @@ const process = {
   login: (req, res) => {
     var id = req.body.id;
     var pw = req.body.pw;
-    // db에서 사용자가 입력한 아이디를 조회한다.
+
     if (id && pw) {
-      // id와 pw가 입력되었는지 확인
       db.mysql.query(
         "SELECT * FROM admin WHERE admin_id = ? AND admin_pw = ?",
         [id, pw],
@@ -298,7 +288,7 @@ const process = {
       (error, result) => {
         if (error) {
           console.error(error);
-          res.redirect("/"); // 에러 발생 시 인덱스 페이지로 리다이렉션
+          res.redirect("/");
         } else {
           res.send(`<script type="text/javascript">alert("회원 탈퇴가 완료되었습니다."); 
             document.location.href="/admin";</script>`);

@@ -54,9 +54,8 @@ const process = {
   login: (req, res) => {
     var id = req.body.id;
     var pw = req.body.pw;
-    // db에서 사용자가 입력한 아이디를 조회한다.
+
     if (id && pw) {
-      // id와 pw가 입력되었는지 확인
       db.mysql.query(
         "SELECT * FROM users WHERE id = ? AND pw = ?",
         [id, pw],
@@ -81,7 +80,6 @@ const process = {
     }
   },
 
-  /* /logout으로 post요청이 오면 로그인 상태를 해제한다.  */
   logout: (req, res) => {
     req.session.destroy(function (err) {
       res.redirect("/");
@@ -167,7 +165,6 @@ const process = {
       pythonProcess.on("close", (code) => {
         if (code === 0) {
           // Python 스크립트 실행 성공
-          // 쿼리 실행
           db.mysql.query(query2, [id], (selectError, selectResults1) => {
             if (selectError) {
               console.error('Error selecting row:', selectError);
@@ -183,7 +180,6 @@ const process = {
               );
             }
 
-            // 쿼리 실행
             db.mysql.query(query3, [status2, id], (updateError, updateResults) => {
               if (updateError) {
                 console.error('Error updating process:', updateError);

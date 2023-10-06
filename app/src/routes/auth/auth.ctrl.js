@@ -45,7 +45,7 @@ const process = {
   login: (req, res) => {
     var id = req.body.id;
     var pw = req.body.pw;
-    // db에서 사용자가 입력한 아이디를 조회한다.
+
     if (id && pw) {
       // id와 pw가 입력되었는지 확인
       db.mysql.query(
@@ -73,7 +73,6 @@ const process = {
     }
   },
 
-  /* /auth/logout으로 post요청이 오면 로그인 상태를 해제한다.  */
   logout: (req, res) => {
     req.session.destroy(function (err) {
       res.redirect("/");
@@ -137,15 +136,11 @@ const process = {
         function (error, results, fields) {
           if (error) throw error;
 
-          // Check if the user exists
           if (results.length > 0) {
             var user = results[0];
 
-            // Check if the  password is correct
             if (user.pw === pw) {
-              // Check if the new password matches the confirmation
               if (new_pw === confirm_pw) {
-                // Update the password in the database
                 db.mysql.query(
                   "UPDATE users SET pw = ? WHERE id = ?",
                   [new_pw, id],
@@ -156,24 +151,20 @@ const process = {
                   }
                 );
               } else {
-                // New password and confirmation do not match
                 res.send(`<script type="text/javascript">alert("새로운 비밀번호와 확인이 일치하지 않습니다."); 
                   document.location.href="/auth/mypage";</script>`);
               }
             } else {
-              //  password is incorrect
               res.send(`<script type="text/javascript">alert("현재 비밀번호가 일치하지 않습니다."); 
                 document.location.href="/auth/mypage";</script>`);
             }
           } else {
-            // User does not exist
             res.send(`<script type="text/javascript">alert("사용자가 존재하지 않습니다."); 
               document.location.href="/auth/mypage";</script>`);
           }
         }
       );
     } else {
-      // Missing information
       res.send(`<script type="text/javascript">alert("입력되지 않은 정보가 있습니다."); 
         document.location.href="/auth/mypage";</script>`);
     }
@@ -189,13 +180,13 @@ const process = {
       (error, result) => {
         if (error) {
           console.error(error);
-          res.redirect("/"); // 에러 발생 시 인덱스 페이지로 리다이렉션
+          res.redirect("/");
         } else {
           // 로그인 데이터 파기 (세션 삭제)
           req.session.destroy((err) => {
             if (err) {
               console.error(err);
-              res.redirect("/"); // 에러 발생 시 인덱스 페이지로 리다이렉션
+              res.redirect("/");
             } else {
               res.send(`<script type="text/javascript">alert("회원 탈퇴가 완료되었습니다."); 
                 document.location.href="/";</script>`);
